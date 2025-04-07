@@ -8,7 +8,7 @@ body {
   margin: 0;
 }
 
-/* STYLES */
+/* ROW + COLUMN STYLES */
 
 .hidden {
   display: none !important;
@@ -51,8 +51,45 @@ header {
   padding: 1px;
 }
 
+/* FONT + IMG STYLES */
+
 h1,
 h2 {
   font-family: 'Proza Libre', sans-serif;
   font-weight: lighter;
+}
+
+img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+@media screen and (width <= 768px) {
+  img {
+    width: 90vw;
+    height: 50vw;
+  }
+}
+
+label {
+  font-family: 'Open Sans', sans-serif;
+}
+
+input,
+textarea {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #b6b6b6;
+  border-radius: 4px;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
 }
