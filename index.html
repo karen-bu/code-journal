@@ -23,6 +23,7 @@
       referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
+
   <body>
     <header>
       <div class="container">
@@ -49,16 +50,18 @@
 
           <div class="column-half">
             <label>Title</label>
-            <div class="textbox"><input type="text" required /></div>
+            <div class="textbox"><input type="text" id="title" required /></div>
             <label>Photo URL</label>
-            <div class="textbox"><input type="text" required /></div>
+            <div class="textbox">
+              <input type="text" id="photo-url" required />
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="column-full">
             <label>Notes</label>
-            <div class="textbox"><textarea required></textarea></div>
+            <div class="textbox"><textarea id="notes" required></textarea></div>
           </div>
         </div>
       </div>
