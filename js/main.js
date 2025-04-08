@@ -1,5 +1,5 @@
 'use strict';
-// Photo Preview from Pasting URL //
+// PHOTO PREVIEW FROM PASTING URL //
 const $photoURL = document.querySelector('#photo-url');
 if (!$photoURL) throw new Error('$photoURL does not exist!');
 const $image = document.querySelector('img');
@@ -19,7 +19,16 @@ $entryForm.addEventListener('submit', (event) => {
   const entryPhotoURL = $entryFormInputs.photoURL.value;
   const entryNotes = $entryFormInputs.notes.value;
   const entryObject = { entryTitle, entryPhotoURL, entryNotes };
+  console.log(entryObject);
   // assigns an entryID property to the new object, taken from the nextEntryID property of the data model
+  entryObject.entryID = data.nextEntryId;
+  console.log(entryObject.entryID);
+  // increments the nextEntryId property of the data model
+  data.nextEntryId++;
+  // adds the new object to the beginning of the data model's array of entries
+  data.entries.unshift(entryObject);
+  // resets the preview image's src attribute back to the placeholder image
+  $image.src = './images/placeholder-image-square.jpg';
+  // resets the form
+  $entryForm.reset();
 });
-console.log($entryForm);
-console.log($entryFormInputs);
