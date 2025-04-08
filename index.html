@@ -41,35 +41,39 @@
       </div>
 
       <div data-view="entry-form">
-        <div class="row">
-          <div class="column-half">
-            <img
-              src="./images/placeholder-image-square.jpg"
-              alt="placeholder image" />
+        <form id="entry-form">
+          <div class="row">
+            <div class="column-half">
+              <img
+                src="./images/placeholder-image-square.jpg"
+                alt="placeholder image" />
+            </div>
           </div>
 
           <div class="column-half">
-            <label>Title</label>
+            <h3>Title</h3>
             <div class="textbox"><input type="text" id="title" required /></div>
-            <label>Photo URL</label>
+            <h3>Photo URL</h3>
             <div class="textbox">
               <input type="text" id="photo-url" required />
             </div>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="column-full">
-            <label>Notes</label>
-            <div class="textbox"><textarea id="notes" required></textarea></div>
+          <div class="row">
+            <div class="column-full">
+              <h3>Notes</h3>
+              <div class="textbox">
+                <textarea id="notes" required></textarea>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="column-full">
-          <button>SAVE</button>
-        </div>
+          <div class="row">
+            <div class="column-full">
+              <button id="submit-button">SAVE</button>
+            </div>
+          </div>
+        </form>
       </div>
 
       <div data-view="entries" class="hidden"></div>
