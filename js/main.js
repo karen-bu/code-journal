@@ -28,7 +28,8 @@ $entryForm.addEventListener('submit', (event) => {
   // adds the new object to the beginning of the data model's array of entries
   data.entries.unshift(entryObject);
   // resets the preview image's src attribute back to the placeholder image
-  $image.src = './images/placeholder-image-square.jpg';
+  // $image.src = './images/placeholder-image-square.jpg';
   // resets the form
-  $entryForm.reset();
+  // $entryForm.reset();
+  writeEntry();
 });

@@ -56,8 +56,10 @@ $entryForm.addEventListener('submit', (event: Event) => {
   data.entries.unshift(entryObject);
 
   // resets the preview image's src attribute back to the placeholder image
-  $image.src = './images/placeholder-image-square.jpg';
+  // $image.src = './images/placeholder-image-square.jpg';
 
   // resets the form
-  $entryForm.reset();
+  // $entryForm.reset();
+
+  writeEntry();
 });
