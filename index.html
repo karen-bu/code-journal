@@ -52,10 +52,12 @@
 
           <div class="column-half">
             <h3>Title</h3>
-            <div class="textbox"><input type="text" id="title" required /></div>
+            <div class="textbox">
+              <input type="text" id="title" name="title" required />
+            </div>
             <h3>Photo URL</h3>
             <div class="textbox">
-              <input type="text" id="photo-url" required />
+              <input type="text" id="photo-url" name="photoURL" required />
             </div>
           </div>
 
@@ -63,7 +65,7 @@
             <div class="column-full">
               <h3>Notes</h3>
               <div class="textbox">
-                <textarea id="notes" required></textarea>
+                <textarea id="notes" name="notes" required></textarea>
               </div>
             </div>
           </div>

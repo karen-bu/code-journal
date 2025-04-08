@@ -25,6 +25,7 @@ interface EntryObject {
   entryTitle: string;
   entryPhotoURL: string;
   entryNotes: string;
+  entryID?: number;
 }
 
 const $entryForm = document.querySelector('form') as HTMLFormElement;
@@ -44,6 +45,8 @@ $entryForm.addEventListener('submit', (event: Event) => {
   console.log(entryObject);
 
   // assigns an entryID property to the new object, taken from the nextEntryID property of the data model
+  entryObject.entryID = data.nextEntryId;
+  console.log(entryObject.entryID);
 });
 
 console.log($entryForm);
