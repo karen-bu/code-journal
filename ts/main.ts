@@ -66,7 +66,45 @@ $entryForm.addEventListener('submit', (event: Event) => {
 
 // VIEWING ENTRIES
 
-function renderEntry(entry): void {
-  const $journalEntry = data.entries[entry];
-  console.log($journalEntry);
+// generating and returning a DOM tree for a single entry in the UL
+function renderEntry(entry: any): void {
+  return data.entries[entry];
 }
+
+// event listener for DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', (event: Event) => {
+  for (let i = 0; i < data.entries.length; i++) {
+    // creating new entry
+    const $ul = document.querySelector('ul');
+
+    const $newEntry = document.createElement('li');
+    $newEntry.setAttribute('class', 'journal-entry');
+
+    const $newEntryRow = document.createElement('div');
+    $newEntryRow.setAttribute('class', 'row');
+
+    const $newEntryColumn1 = document.createElement('div');
+    $newEntryColumn1.setAttribute('class', 'column-half entry-img');
+
+    const $newEntryPhoto = document.createElement('img');
+    $newEntryPhoto.setAttribute('src', renderEntry(i).entryPhotoURL);
+
+    const $newEntryColumn2 = document.createElement('div');
+    $newEntryColumn2.setAttribute('class', 'column-half entry-text');
+
+    const $newEntryH1 = document.createElement('h1');
+    $newEntryH1.textContent = renderEntry(i).entryTitle;
+
+    const $newEntryNotes = document.createElement('p');
+    $newEntryNotes.textContent = renderEntry(i).entryNotes;
+
+    // appending new entries to DOM
+    $ul?.appendChild($newEntry);
+    $newEntry?.appendChild($newEntryRow);
+    $newEntryRow?.appendChild($newEntryColumn1);
+    $newEntryColumn1?.appendChild($newEntryPhoto);
+    $newEntryRow?.appendChild($newEntryColumn2);
+    $newEntryColumn2?.appendChild($newEntryH1);
+    $newEntryColumn2?.appendChild($newEntryNotes);
+  }
+});
