@@ -43,11 +43,9 @@ $entryForm.addEventListener('submit', (event: Event) => {
   const entryPhotoURL = $entryFormInputs.photoURL.value;
   const entryNotes = $entryFormInputs.notes.value;
   const entryObject: EntryObject = { entryTitle, entryPhotoURL, entryNotes };
-  console.log(entryObject);
 
   // assigns an entryID property to the new object, taken from the nextEntryID property of the data model
   entryObject.entryID = data.nextEntryId;
-  console.log(entryObject.entryID);
 
   // increments the nextEntryId property of the data model
   data.nextEntryId++;
@@ -56,10 +54,11 @@ $entryForm.addEventListener('submit', (event: Event) => {
   data.entries.unshift(entryObject);
 
   // resets the preview image's src attribute back to the placeholder image
-  // $image.src = './images/placeholder-image-square.jpg';
+  $image.src = './images/placeholder-image-square.jpg';
 
   // resets the form
-  // $entryForm.reset();
+  $entryForm.reset();
 
+  // writes the modified data model to localStorage
   writeEntry();
 });

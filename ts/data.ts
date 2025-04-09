@@ -5,7 +5,7 @@ interface Data {
   nextEntryId: number;
 }
 
-const data: Data = {
+let data: Data = {
   view: 'entry-form',
   entries: [],
   editing: null,
@@ -14,18 +14,16 @@ const data: Data = {
 
 function writeEntry(): void {
   const entryJSON = JSON.stringify(data);
-  localStorage.setItem('entry', entryJSON);
-  console.log('entryJSON:', entryJSON);
+  localStorage.setItem('entry-storage', entryJSON);
 }
 
 function readEntry(): any {
-  const entryStorage = localStorage.getItem('entry');
-  if (!entryStorage) {
-    return data;
-  } else {
+  const entryStorage = localStorage.getItem('entry-storage') as string;
+  if (entryStorage !== '') {
     return JSON.parse(entryStorage);
+  } else {
+    return data;
   }
 }
 
-console.log(writeEntry());
-console.log(readEntry());
+data = readEntry();

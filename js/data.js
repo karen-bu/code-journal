@@ -1,20 +1,21 @@
-'use strict';
-const data = {
-  view: 'entry-form',
-  entries: [],
-  editing: null,
-  nextEntryId: 1,
+"use strict";
+let data = {
+    view: 'entry-form',
+    entries: [],
+    editing: null,
+    nextEntryId: 1,
 };
 function writeEntry() {
-  const entryJSON = JSON.stringify(data);
-  localStorage.setItem('entry', entryJSON);
-  console.log('entryJSON:', entryJSON);
+    const entryJSON = JSON.stringify(data);
+    localStorage.setItem('entry-storage', entryJSON);
 }
 function readEntry() {
-  const entryStorage = localStorage.getItem('entry');
-  if (!entryStorage) {
-    return data;
-  } else {
-    return JSON.parse(entryStorage);
-  }
+    const entryStorage = localStorage.getItem('entry-storage');
+    if (entryStorage !== '') {
+        return JSON.parse(entryStorage);
+    }
+    else {
+        return data;
+    }
 }
+data = readEntry();
