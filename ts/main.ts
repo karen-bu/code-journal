@@ -1,3 +1,5 @@
+// ---------------- ISSUE 1 ---------------- //
+
 // PHOTO PREVIEW FROM PASTING URL //
 
 const $photoURL = document.querySelector('#photo-url');
@@ -59,3 +61,12 @@ $entryForm.addEventListener('submit', (event: Event) => {
   // writes the modified data model to localStorage
   writeEntry();
 });
+
+// ---------------- ISSUE 2 ---------------- //
+
+// VIEWING ENTRIES
+
+function renderEntry(entry): void {
+  const $journalEntry = data.entries[entry];
+  console.log($journalEntry);
+}

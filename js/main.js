@@ -1,4 +1,5 @@
 "use strict";
+// ---------------- ISSUE 1 ---------------- //
 // PHOTO PREVIEW FROM PASTING URL //
 const $photoURL = document.querySelector('#photo-url');
 if (!$photoURL)
@@ -15,7 +16,7 @@ if (!$entryForm)
     throw new Error('$entryForm does not exist!');
 const $entryFormInputs = $entryForm.elements;
 $entryForm.addEventListener('submit', (event) => {
-    // prevent the page from refreshing
+    // prevents the page from refreshing
     event.preventDefault();
     // stores the form's input values in a new object
     const entryTitle = $entryFormInputs.title.value;
@@ -35,3 +36,9 @@ $entryForm.addEventListener('submit', (event) => {
     // writes the modified data model to localStorage
     writeEntry();
 });
+// ---------------- ISSUE 2 ---------------- //
+// VIEWING ENTRIES
+function renderEntry(entry) {
+    const $journalEntry = data.entries[entry];
+    console.log($journalEntry);
+}

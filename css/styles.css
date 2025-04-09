@@ -83,7 +83,7 @@ ul {
   padding: 0;
 }
 
-li {
+li.journal-entry {
   margin-top: 20px;
   margin-bottom: 20px;
 }
