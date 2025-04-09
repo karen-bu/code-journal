@@ -36,47 +36,117 @@
     </header>
 
     <main class="container">
-      <div class="row">
-        <div class="column-full"><h1>New Entry</h1></div>
-      </div>
+      <div class="new-entry hidden">
+        <div class="row">
+          <div class="column-full"><h1>New Entry</h1></div>
+        </div>
 
-      <div data-view="entry-form">
-        <form id="entry-form">
-          <div class="row">
-            <div class="column-half">
-              <img
-                src="./images/placeholder-image-square.jpg"
-                alt="placeholder image" />
-            </div>
-          </div>
-
-          <div class="column-half">
-            <h3>Title</h3>
-            <div class="textbox">
-              <input type="text" id="title" name="title" required />
-            </div>
-            <h3>Photo URL</h3>
-            <div class="textbox">
-              <input type="text" id="photo-url" name="photoURL" required />
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="column-full">
-              <h3>Notes</h3>
-              <div class="textbox">
-                <textarea id="notes" name="notes" required></textarea>
+        <div data-view="entry-form ">
+          <form id="entry-form">
+            <div class="row">
+              <div class="column-half">
+                <img
+                  src="./images/placeholder-image-square.jpg"
+                  alt="placeholder image" />
               </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="column-full">
-              <button id="submit-button">SAVE</button>
+            <div class="column-half">
+              <h3>Title</h3>
+              <div class="textbox">
+                <input type="text" id="title" name="title" required />
+              </div>
+              <h3>Photo URL</h3>
+              <div class="textbox">
+                <input type="text" id="photo-url" name="photoURL" required />
+              </div>
             </div>
-          </div>
-        </form>
+
+            <div class="row">
+              <div class="column-full">
+                <h3>Notes</h3>
+                <div class="textbox">
+                  <textarea id="notes" name="notes" required></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="column-full">
+                <button id="submit-button">SAVE</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- end data-view="entry-form" -->
       </div>
+      <!-- end div="new-entry"-->
+
+      <div data-view="entries">
+        <!-- subheader + button -->
+        <div class="row">
+          <div class="column-quarter"><h1>Entries</h1></div>
+          <div class="column-quarter"><button id="new-button">NEW</button></div>
+        </div>
+
+        <!-- entries -->
+        <div class="row">
+          <div class="column-full no-entries hidden">
+            <p>No entries have been recorded.</p>
+          </div>
+        </div>
+
+        <ul>
+          <li>
+            <div class="row">
+              <div class="column-half entry-img">
+                <img
+                  src="./images/placeholder-image-square.jpg"
+                  alt="placeholder image" />
+              </div>
+              <div class="column-half entry-text">
+                <h1>Placeholder Entry #1</h1>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a
+                  tortor in tellus congue fermentum vitae ac quam. Aenean
+                  facilisis felis ac consectetur lobortis. Vestibulum
+                  condimentum urna vitae metus venenatis, nec placerat neque
+                  viverra. Proin interdum et mauris id auctor. Morbi vitae
+                  gravida ex. Ut bibendum arcu urna, eget elementum sapien
+                  vestibulum nec. Morbi semper, felis eu tempor hendrerit, nisi
+                  nunc euismod mauris, nec viverra neque lorem non nulla. Duis
+                  vehicula nec enim nec mollis.
+                </p>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="row">
+              <div class="column-half entry-img">
+                <img
+                  src="./images/placeholder-image-square.jpg"
+                  alt="placeholder image" />
+              </div>
+              <div class="column-half entry-text">
+                <h1>Placeholder Entry #2</h1>
+                <p class="entry">
+                  Vivamus sit amet malesuada ex, accumsan scelerisque nibh.
+                  Nullam sagittis posuere varius. Proin metus tortor, placerat
+                  non dictum fermentum, venenatis non nulla. Aliquam a consequat
+                  turpis, sed mattis dui. Donec eget ipsum euismod, accumsan
+                  diam laoreet, sodales dolor. Pellentesque a massa ac purus
+                  fringilla consequat vitae eget leo. Vivamus sollicitudin nisi
+                  nisi, at vulputate augue egestas quis. Suspendisse potenti.
+                  Donec ultrices, velit rhoncus lacinia lacinia, leo elit
+                  maximus odio, sed dictum est risus nec tortor.
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- end data-view="entries"-->
     </main>
 
     <script src="js/data.js"></script>
