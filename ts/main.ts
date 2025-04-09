@@ -32,7 +32,7 @@ if (!$entryForm) throw new Error('$entryForm does not exist!');
 const $entryFormInputs = $entryForm.elements as FormElements;
 
 $entryForm.addEventListener('submit', (event: Event) => {
-  // prevent the page from refreshing
+  // prevents the page from refreshing
   event.preventDefault();
 
   // stores the form's input values in a new object
