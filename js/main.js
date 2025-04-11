@@ -1,73 +1,70 @@
-"use strict";
+'use strict';
 // ---------------- ISSUE 1 ---------------- //
 // PHOTO PREVIEW FROM PASTING URL //
 const $photoURL = document.querySelector('#photo-url');
-if (!$photoURL)
-    throw new Error('$photoURL does not exist!');
+if (!$photoURL) throw new Error('$photoURL does not exist!');
 const $image = document.querySelector('img');
-if (!$image)
-    throw new Error('$image does not exist!');
+if (!$image) throw new Error('$image does not exist!');
 $photoURL.addEventListener('input', (event) => {
-    const inputURL = event.target;
-    $image.src = inputURL.value;
+  const inputURL = event.target;
+  $image.src = inputURL.value;
 });
 const $entryForm = document.querySelector('form');
-if (!$entryForm)
-    throw new Error('$entryForm does not exist!');
+if (!$entryForm) throw new Error('$entryForm does not exist!');
 const $entryFormInputs = $entryForm.elements;
 $entryForm.addEventListener('submit', (event) => {
-    // prevents the page from refreshing
-    event.preventDefault();
-    // stores the form's input values in a new object
-    const entryTitle = $entryFormInputs.title.value;
-    const entryPhotoURL = $entryFormInputs.photoURL.value;
-    const entryNotes = $entryFormInputs.notes.value;
-    const entryObject = { entryTitle, entryPhotoURL, entryNotes };
-    // assigns an entryID property to the new object, taken from the nextEntryID property of the data model
-    entryObject.entryID = data.nextEntryId;
-    // increments the nextEntryId property of the data model
-    data.nextEntryId++;
-    // adds the new object to the beginning of the data model's array of entries
-    data.entries.unshift(entryObject);
-    // resets the preview image's src attribute back to the placeholder image
-    $image.src = './images/placeholder-image-square.jpg';
-    // resets the form
-    $entryForm.reset();
-    // writes the modified data model to localStorage
-    writeEntry();
+  // prevents the page from refreshing
+  event.preventDefault();
+  // stores the form's input values in a new object
+  const entryTitle = $entryFormInputs.title.value;
+  const entryPhotoURL = $entryFormInputs.photoURL.value;
+  const entryNotes = $entryFormInputs.notes.value;
+  const entryObject = { entryTitle, entryPhotoURL, entryNotes };
+  // assigns an entryID property to the new object, taken from the nextEntryID property of the data model
+  entryObject.entryID = data.nextEntryId;
+  // increments the nextEntryId property of the data model
+  data.nextEntryId++;
+  // adds the new object to the beginning of the data model's array of entries
+  data.entries.unshift(entryObject);
+  // resets the preview image's src attribute back to the placeholder image
+  $image.src = './images/placeholder-image-square.jpg';
+  // resets the form
+  $entryForm.reset();
+  // writes the modified data model to localStorage
+  writeEntry();
 });
 // ---------------- ISSUE 2 ---------------- //
 // VIEWING ENTRIES
 // generating and returning a DOM tree for a single entry in the UL
 function renderEntry(entry) {
-    return data.entries[entry];
+  return data.entries[entry];
 }
 // event listener for DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', (event) => {
-    for (let i = 0; i < data.entries.length; i++) {
-        // creating new entry
-        const $ul = document.querySelector('ul');
-        const $newEntry = document.createElement('li');
-        $newEntry.setAttribute('class', 'journal-entry');
-        const $newEntryRow = document.createElement('div');
-        $newEntryRow.setAttribute('class', 'row');
-        const $newEntryColumn1 = document.createElement('div');
-        $newEntryColumn1.setAttribute('class', 'column-half entry-img');
-        const $newEntryPhoto = document.createElement('img');
-        $newEntryPhoto.setAttribute('src', renderEntry(i).entryPhotoURL);
-        const $newEntryColumn2 = document.createElement('div');
-        $newEntryColumn2.setAttribute('class', 'column-half entry-text');
-        const $newEntryH1 = document.createElement('h1');
-        $newEntryH1.textContent = renderEntry(i).entryTitle;
-        const $newEntryNotes = document.createElement('p');
-        $newEntryNotes.textContent = renderEntry(i).entryNotes;
-        // appending new entries to DOM
-        $ul?.appendChild($newEntry);
-        $newEntry?.appendChild($newEntryRow);
-        $newEntryRow?.appendChild($newEntryColumn1);
-        $newEntryColumn1?.appendChild($newEntryPhoto);
-        $newEntryRow?.appendChild($newEntryColumn2);
-        $newEntryColumn2?.appendChild($newEntryH1);
-        $newEntryColumn2?.appendChild($newEntryNotes);
-    }
+  for (let i = 0; i < data.entries.length; i++) {
+    // creating new entry
+    const $ul = document.querySelector('ul');
+    const $newEntry = document.createElement('li');
+    $newEntry.setAttribute('class', 'journal-entry');
+    const $newEntryRow = document.createElement('div');
+    $newEntryRow.setAttribute('class', 'row');
+    const $newEntryColumn1 = document.createElement('div');
+    $newEntryColumn1.setAttribute('class', 'column-half entry-img');
+    const $newEntryPhoto = document.createElement('img');
+    $newEntryPhoto.setAttribute('src', renderEntry(i).entryPhotoURL);
+    const $newEntryColumn2 = document.createElement('div');
+    $newEntryColumn2.setAttribute('class', 'column-half entry-text');
+    const $newEntryH1 = document.createElement('h1');
+    $newEntryH1.textContent = renderEntry(i).entryTitle;
+    const $newEntryNotes = document.createElement('p');
+    $newEntryNotes.textContent = renderEntry(i).entryNotes;
+    // appending new entries to DOM
+    $ul?.appendChild($newEntry);
+    $newEntry?.appendChild($newEntryRow);
+    $newEntryRow?.appendChild($newEntryColumn1);
+    $newEntryColumn1?.appendChild($newEntryPhoto);
+    $newEntryRow?.appendChild($newEntryColumn2);
+    $newEntryColumn2?.appendChild($newEntryH1);
+    $newEntryColumn2?.appendChild($newEntryNotes);
+  }
 });
