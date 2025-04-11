@@ -36,53 +36,50 @@
     </header>
 
     <main class="container">
-      <div class="new-entry">
+      <div class="view entryform hidden" data-view="entry-form">
         <div class="row">
           <div class="column-full"><h1>New Entry</h1></div>
         </div>
 
-        <div data-view="entry-form">
-          <form id="entry-form">
-            <div class="row">
-              <div class="column-half">
-                <img
-                  src="./images/placeholder-image-square.jpg"
-                  alt="placeholder image" />
-              </div>
-            </div>
-
+        <form id="entry-form">
+          <div class="row">
             <div class="column-half">
-              <h3>Title</h3>
-              <div class="textbox">
-                <input type="text" id="title" name="title" required />
-              </div>
-              <h3>Photo URL</h3>
-              <div class="textbox">
-                <input type="text" id="photo-url" name="photoURL" required />
-              </div>
+              <img
+                src="./images/placeholder-image-square.jpg"
+                alt="placeholder image" />
             </div>
+          </div>
 
-            <div class="row">
-              <div class="column-full">
-                <h3>Notes</h3>
-                <div class="textbox">
-                  <textarea id="notes" name="notes" required></textarea>
-                </div>
-              </div>
+          <div class="column-half">
+            <h3>Title</h3>
+            <div class="textbox">
+              <input type="text" id="title" name="title" required />
             </div>
+            <h3>Photo URL</h3>
+            <div class="textbox">
+              <input type="text" id="photo-url" name="photoURL" required />
+            </div>
+          </div>
 
-            <div class="row">
-              <div class="column-full">
-                <button id="submit-button">SAVE</button>
+          <div class="row">
+            <div class="column-full">
+              <h3>Notes</h3>
+              <div class="textbox">
+                <textarea id="notes" name="notes" required></textarea>
               </div>
             </div>
-          </form>
-        </div>
-        <!-- end data-view="entry-form" -->
+          </div>
+
+          <div class="row">
+            <div class="column-full">
+              <button id="submit-button">SAVE</button>
+            </div>
+          </div>
+        </form>
       </div>
       <!-- end div="new-entry"-->
 
-      <div data-view="entries ">
+      <div class="view entrylist" data-view="entries ">
         <!-- subheader + button -->
         <div class="row">
           <div class="column-quarter"><h1>Entries</h1></div>

@@ -1,5 +1,6 @@
 "use strict";
 const data = readEntry();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function writeEntry() {
     const entryJSON = JSON.stringify(data);
     localStorage.setItem('entry-storage', entryJSON);

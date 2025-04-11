@@ -105,15 +105,31 @@ document.addEventListener('DOMContentLoaded', (): void => {
 });
 
 // create a function to toggle no entries text to show or hide when the function is called
-
 function toggleNoEntries(): void {
   if (data.nextEntryId === 1) {
-    const $noEntryDiv = document.querySelector(
-      '.column-full.no-entries.hidden',
-    );
+    const $noEntryDiv = document.querySelector('.no-entries');
     if (!$noEntryDiv) throw new Error('$noEntryDiv does not exist!');
     $noEntryDiv.className = 'column-full no-entries';
   } else readEntry();
 }
 
-toggleNoEntries();
+// create function to swap views between entries or entry-form
+function viewSwap(viewName: any): void {
+  const $entryForm = document.querySelector('.view.entryform');
+  if (!$entryForm) throw new Error('$entryForm does not exist!');
+
+  const $entryList = document.querySelector('.view.entrylist');
+  if (!$entryList) throw new Error('$entryList does not exist!');
+
+  if (viewName === 'entries') {
+    $entryForm.className = 'view entryform hidden';
+    $entryList.className = 'view entrylist';
+    data.view = 'entries';
+    console.log(data);
+  } else if (viewName === 'entry-form') {
+    $entryForm.className = 'view entryform';
+    $entryList.className = 'view entrylist hidden';
+    data.view = 'entry-form';
+    console.log(data);
+  }
+}
