@@ -60,6 +60,21 @@ header {
   text-align: center;
 }
 
+.entries-anchor {
+  position: relative;
+}
+
+#entries-anchor-entries,
+#entries-anchor-entryform {
+  position: absolute;
+  color: white;
+  bottom: 98px;
+  left: 180px;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bolder;
+}
+
 /* FONT + IMG STYLES */
 
 h1,

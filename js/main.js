@@ -84,6 +84,7 @@ function toggleNoEntries() {
     else
         readEntry();
 }
+toggleNoEntries();
 // create function to swap views between entries or entry-form
 function viewSwap(viewName) {
     const $entryForm = document.querySelector('.view.entryform');
@@ -105,3 +106,16 @@ function viewSwap(viewName) {
         console.log(data);
     }
 }
+// add anchor to navbar to show 'entries' view
+// for the entry list view
+const $entriesAnchorEntries = document.querySelector('#entries-anchor-entries');
+$entriesAnchorEntries?.addEventListener('click', (event) => {
+    console.log(event.target);
+    viewSwap('entries');
+});
+// for the entry form view
+const $entriesAnchorForm = document.querySelector('#entries-anchor-entryform');
+$entriesAnchorForm?.addEventListener('click', (event) => {
+    console.log(event.target);
+    viewSwap('entries');
+});
