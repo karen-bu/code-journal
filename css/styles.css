@@ -62,17 +62,25 @@ header {
 
 .entries-anchor {
   position: relative;
+  max-width: 0;
 }
 
 #entries-anchor-entries,
 #entries-anchor-entryform {
   position: absolute;
   color: white;
-  bottom: 98px;
   left: 180px;
   font-size: 18px;
   font-family: 'Open Sans', sans-serif;
   font-weight: bolder;
+}
+
+#entries-anchor-entryform {
+  bottom: 98px;
+}
+
+#entries-anchor-entries {
+  bottom: 152px;
 }
 
 /* FONT + IMG STYLES */
