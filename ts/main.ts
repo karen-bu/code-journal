@@ -141,13 +141,17 @@ function viewSwap(viewName: any): void {
 // for the entry list view
 const $entriesAnchorEntries = document.querySelector('#entries-anchor-entries');
 $entriesAnchorEntries?.addEventListener('click', (event: Event): void => {
-  console.log(event.target);
   viewSwap('entries');
 });
 
 // for the entry form view
 const $entriesAnchorForm = document.querySelector('#entries-anchor-entryform');
 $entriesAnchorForm?.addEventListener('click', (event: Event): void => {
-  console.log(event.target);
   viewSwap('entries');
+});
+
+// add an anchor to the entries view to show the entry-form via "new" button
+const $newEntryButton = document.querySelector('#new-button');
+$newEntryButton?.addEventListener('click', (event: Event): void => {
+  viewSwap('entry-form');
 });
