@@ -31,6 +31,10 @@ body {
   width: 100%;
 }
 
+.column-quarter {
+  width: 50%;
+}
+
 @media screen and (width >= 768px) {
   .container {
     max-width: 900px;
@@ -52,6 +56,33 @@ header {
   padding: 1px;
 }
 
+.no-entries {
+  text-align: center;
+}
+
+.entries-anchor {
+  position: relative;
+  max-width: 0;
+}
+
+#entries-anchor-entries,
+#entries-anchor-entryform {
+  position: absolute;
+  color: white;
+  left: 180px;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bolder;
+}
+
+#entries-anchor-entryform {
+  bottom: 98px;
+}
+
+#entries-anchor-entries {
+  bottom: 152px;
+}
+
 /* FONT + IMG STYLES */
 
 h1,
@@ -63,6 +94,21 @@ h2 {
 h3 {
   font-family: 'Proza Libre', sans-serif;
   font-size: 12pt;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li.journal-entry {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 img {
@@ -86,6 +132,10 @@ button {
   height: 40px;
   width: 55px;
   border-radius: 10px;
+}
+
+#new-button {
+  margin-top: 30px;
 }
 
 input,

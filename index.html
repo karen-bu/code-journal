@@ -36,11 +36,14 @@
     </header>
 
     <main class="container">
-      <div class="row">
-        <div class="column-full"><h1>New Entry</h1></div>
-      </div>
+      <div class="view entryform hidden" data-view="entry-form">
+        <div class="row">
+          <div class="column-full"><h1>New Entry</h1></div>
+        </div>
+        <div class="column-quarter entries-anchor">
+          <div id="entries-anchor-entryform"><h3>Entries</h3></div>
+        </div>
 
-      <div data-view="entry-form">
         <form id="entry-form">
           <div class="row">
             <div class="column-half">
@@ -77,6 +80,31 @@
           </div>
         </form>
       </div>
+      <!-- end data-view="entry-form" -->
+
+      <div class="view entrylist" data-view="entries">
+        <!-- subheader + button -->
+        <div class="row">
+          <div class="column-quarter"><h1>Entries</h1></div>
+          <div class="column-quarter"><button id="new-button">NEW</button></div>
+          <div class="column-quarter entries-anchor">
+            <div id="entries-anchor-entries"><h3>Entries</h3></div>
+          </div>
+
+          <!-- entries -->
+          <div class="row">
+            <div class="column-full"><ul></ul></div>
+          </div>
+        </div>
+
+        <!-- no entries -->
+        <div class="row no-entries hidden">
+          <div class="column-full">
+            <p>No entries have been recorded.</p>
+          </div>
+        </div>
+      </div>
+      <!-- end data-view="entries"-->
     </main>
 
     <script src="js/data.js"></script>
