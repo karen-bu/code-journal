@@ -27,9 +27,12 @@
   <body>
     <header>
       <div class="container">
-        <div class="row">
-          <div class="column-full">
+        <div class="row header">
+          <div class="column-quarter">
             <h2>Code Journal</h2>
+          </div>
+          <div class="column-quarter entries-anchor">
+            <div><h3>Entries</h3></div>
           </div>
         </div>
       </div>
@@ -40,27 +43,26 @@
         <div class="row">
           <div class="column-full"><h1>New Entry</h1></div>
         </div>
-        <div class="column-quarter entries-anchor">
-          <div id="entries-anchor-entryform"><h3>Entries</h3></div>
-        </div>
 
         <form id="entry-form">
-          <div class="row">
-            <div class="column-half">
-              <img
-                src="./images/placeholder-image-square.jpg"
-                alt="placeholder image" />
+          <div class="row entry-form-half">
+            <div class="row">
+              <div class="column-half-img">
+                <img
+                  src="./images/placeholder-image-square.jpg"
+                  alt="placeholder image" />
+              </div>
             </div>
-          </div>
 
-          <div class="column-half">
-            <h3>Title</h3>
-            <div class="textbox">
-              <input type="text" id="title" name="title" required />
-            </div>
-            <h3>Photo URL</h3>
-            <div class="textbox">
-              <input type="text" id="photo-url" name="photoURL" required />
+            <div class="column-half entry">
+              <h3>Title</h3>
+              <div class="textbox">
+                <input type="text" id="title" name="title" required />
+              </div>
+              <h3>Photo URL</h3>
+              <div class="textbox">
+                <input type="text" id="photo-url" name="photoURL" required />
+              </div>
             </div>
           </div>
 
@@ -84,24 +86,23 @@
 
       <div class="view entrylist" data-view="entries">
         <!-- subheader + button -->
-        <div class="row">
-          <div class="column-quarter"><h1>Entries</h1></div>
-          <div class="column-quarter"><button id="new-button">NEW</button></div>
-          <div class="column-quarter entries-anchor">
-            <div id="entries-anchor-entries"><h3>Entries</h3></div>
-          </div>
-
-          <!-- entries -->
-          <div class="row">
-            <div class="column-full"><ul></ul></div>
+        <div class="row subheader">
+          <div class="column-half subheader"><h1>Entries</h1></div>
+          <div class="column-half subheader">
+            <button id="new-button">NEW</button>
           </div>
         </div>
 
-        <!-- no entries -->
-        <div class="row no-entries hidden">
-          <div class="column-full">
-            <p>No entries have been recorded.</p>
-          </div>
+        <!-- entries -->
+        <div class="row">
+          <div class="column-full"><ul></ul></div>
+        </div>
+      </div>
+
+      <!-- no entries -->
+      <div class="row no-entries">
+        <div class="column-full">
+          <p>No entries have been recorded.</p>
         </div>
       </div>
       <!-- end data-view="entries"-->
