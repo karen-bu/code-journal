@@ -1,3 +1,8 @@
+// test url 1: https://64.media.tumblr.com/1b54e834bda85fc26bc6a018e5f9b444/a3ba198d6b60f48d-cd/s1280x1920/4b031174a9cb50953918afe5ca37e1143ff5ee80.jpg
+// test url 2: https://64.media.tumblr.com/a676bf6547d045021cd4f0d59a5a6bcf/69b2f4deb5e1518b-c5/s1280x1920/2ed51076367f818726f73ff58c62fe5943a89aaf.jpg
+// test url 3: https://64.media.tumblr.com/81d06a9d4b7488ba4680367802e24e4d/dd16d4a1f06633be-10/s1280x1920/cda28cd49a068f497661b96065a359d48e93d308.jpg
+// test url 4: https://64.media.tumblr.com/704b217831d890fee3e84c5f28646889/dfeae80de15b3de7-08/s1280x1920/78f8d964fcff80916d40ea5e6121afbc5562f283.jpg
+
 // PHOTO PREVIEW FROM PASTING URL //
 
 const $photoURL = document.querySelector('#photo-url');
@@ -6,6 +11,7 @@ if (!$photoURL) throw new Error('$photoURL does not exist!');
 const $image = document.querySelector('img') as HTMLImageElement;
 if (!$image) throw new Error('$image does not exist!');
 
+// EVENT LISTENER FOR PHOTO PREVIEW FROM FORM PASTE
 $photoURL.addEventListener('input', (event: Event) => {
   const inputURL = event.target as HTMLInputElement;
   $image.src = inputURL.value;
@@ -24,45 +30,44 @@ if (!$entryForm) throw new Error('$entryForm does not exist!');
 
 const $entryFormInputs = $entryForm.elements as FormElements;
 
-// test url 1: https://64.media.tumblr.com/1b54e834bda85fc26bc6a018e5f9b444/a3ba198d6b60f48d-cd/s1280x1920/4b031174a9cb50953918afe5ca37e1143ff5ee80.jpg
-// test url 2: https://64.media.tumblr.com/a676bf6547d045021cd4f0d59a5a6bcf/69b2f4deb5e1518b-c5/s1280x1920/2ed51076367f818726f73ff58c62fe5943a89aaf.jpg
-// test url 3: https://64.media.tumblr.com/81d06a9d4b7488ba4680367802e24e4d/dd16d4a1f06633be-10/s1280x1920/cda28cd49a068f497661b96065a359d48e93d308.jpg
-// test url 4: https://64.media.tumblr.com/704b217831d890fee3e84c5f28646889/dfeae80de15b3de7-08/s1280x1920/78f8d964fcff80916d40ea5e6121afbc5562f283.jpg
-
+// EVENT LISTENER FOR SUBMITTING THE FORM
 $entryForm.addEventListener('submit', (event: Event) => {
-  // prevents the page from refreshing
-  event.preventDefault();
+  // if data.editing is null ...
+  if (data.editing === null) {
+    // prevent the page from refreshing
+    event.preventDefault();
 
-  // stores the form's input values in a new object + assigns entryID property
-  const newEntry: JournalEntry = {
-    entryTitle: $entryFormInputs.title.value,
-    entryPhotoURL: $entryFormInputs.photoURL.value,
-    entryNotes: $entryFormInputs.notes.value,
-    entryID: data.nextEntryId,
-  };
+    // store the form's input values in a new object + assigns entryID property
+    const newEntry: JournalEntry = {
+      entryTitle: $entryFormInputs.title.value,
+      entryPhotoURL: $entryFormInputs.photoURL.value,
+      entryNotes: $entryFormInputs.notes.value,
+      entryID: data.nextEntryId,
+    };
 
-  // increments the nextEntryId property of the data model
-  data.nextEntryId++;
+    // increment the nextEntryId property of the data model
+    data.nextEntryId++;
 
-  // adds the new object to the beginning of the data model's array of entries
-  data.entries.unshift(newEntry);
+    // add the new object to the beginning of the data model's array of entries
+    data.entries.unshift(newEntry);
 
-  // resets the preview image's src attribute back to the placeholder image
-  $image.src = './images/placeholder-image-square.jpg';
+    // reset the preview image's src attribute back to the placeholder image
+    $image.src = './images/placeholder-image-square.jpg';
 
-  // resets the form
-  $entryForm.reset();
+    // reset the form
+    $entryForm.reset();
 
-  // writes the modified data model to localStorage
-  writeEntry();
+    // write the modified data model to localStorage
+    writeEntry();
 
-  // render a DOM tree for the newly submitted entry object
-  const $ul = document.querySelector('ul');
-  if (!$ul) throw new Error('$ul does not exist!');
-  $ul.prepend(renderEntry(newEntry));
+    // render a DOM tree for the newly submitted entry object
+    const $ul = document.querySelector('ul');
+    if (!$ul) throw new Error('$ul does not exist!');
+    $ul.prepend(renderEntry(newEntry));
 
-  // shows the entries view
-  viewSwap('entries');
+    // show the entries view
+    viewSwap('entries');
+  }
 });
 
 // VIEWING ENTRIES
@@ -214,7 +219,7 @@ $newEntryButton?.addEventListener('click', (): void => {
   viewSwap('entry-form');
 });
 
-// event listener for ul for editing
+// EVENT LISTENER FOR UL EDITING
 const $ul = document.querySelector('ul');
 if (!$ul) throw new Error('$ul does not exist!');
 
@@ -226,7 +231,7 @@ $ul?.addEventListener('click', (event: Event): void => {
   viewSwap('entry-form');
 
   // find entry object in the data.entries array whose id matches the data-entry-id attribute value of the clicked entry
-  // and assigns that entry’s object to the data.editing property.
+  // and assigns that entry’s object to the data.editing property
 
   const editIcon = event.target as HTMLLIElement;
   const dataEntryID = Number(editIcon?.dataset.entryId);
@@ -252,14 +257,6 @@ $ul?.addEventListener('click', (event: Event): void => {
   $photoURL.value = data.editing.entryPhotoURL;
   $image.src = data.editing.entryPhotoURL;
   $entryFormInputNotes.value = data.editing.entryNotes;
-
-  console.log($entryFormInputTitle);
-  console.log($photoURL);
-  console.log($entryFormInputNotes);
-
-  console.log(data.editing.entryTitle);
-  console.log(data.editing.entryPhotoURL);
-  console.log(data.editing.entryNotes);
 
   // changes the title of the entry form to 'Edit Entry'
   $entryFormTitle.textContent = 'Edit Entry';
