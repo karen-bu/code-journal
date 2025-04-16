@@ -2,7 +2,7 @@ interface JournalEntry {
   entryTitle: string;
   entryPhotoURL: string;
   entryNotes: string;
-  entryID?: number;
+  entryID: number;
 }
 
 interface Data {

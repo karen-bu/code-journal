@@ -1,14 +1,17 @@
 'use strict';
 // test url 1: https://64.media.tumblr.com/1b54e834bda85fc26bc6a018e5f9b444/a3ba198d6b60f48d-cd/s1280x1920/4b031174a9cb50953918afe5ca37e1143ff5ee80.jpg
+// a drawing based on lyrics from the glass animals song, 'pools' from their 2014 album zaba. zaba was the band's debut album and established their signature style of offbeat percussion and psychedelic sounds incorporated into pop music.
 // test url 2: https://64.media.tumblr.com/a676bf6547d045021cd4f0d59a5a6bcf/69b2f4deb5e1518b-c5/s1280x1920/2ed51076367f818726f73ff58c62fe5943a89aaf.jpg
+// a drawing based on lyrics from the song 'i just want to sell out my funeral' by the wonder years from their 2013 album, 'the greatest generation.' the album received critical acclaim when released and was widely regarded to have pushed the boundaries of the pop-punk genre.
 // test url 3: https://64.media.tumblr.com/81d06a9d4b7488ba4680367802e24e4d/dd16d4a1f06633be-10/s1280x1920/cda28cd49a068f497661b96065a359d48e93d308.jpg
+// fanart of the anime character kyotaro sugishita, from the manga/anime 'wind breaker.' the manga was first released in 2021, and the first season of the anime released in 2024. wind breaker is considered a shonen fight anime.
 // test url 4: https://64.media.tumblr.com/704b217831d890fee3e84c5f28646889/dfeae80de15b3de7-08/s1280x1920/78f8d964fcff80916d40ea5e6121afbc5562f283.jpg
+// concept art of two original characters from a comic idea in development. the character on the left is 'godchild', a rapper who is a vampire. the character on the right is 'dogboy', a rapper who is a werewolf. the premise of the comic revolves around the two of them navigating the music industry .
 // PHOTO PREVIEW FROM PASTING URL //
 const $photoURL = document.querySelector('#photo-url');
 if (!$photoURL) throw new Error('$photoURL does not exist!');
 const $image = document.querySelector('img');
 if (!$image) throw new Error('$image does not exist!');
-// EVENT LISTENER FOR PHOTO PREVIEW FROM FORM PASTE
 $photoURL.addEventListener('input', (event) => {
   const inputURL = event.target;
   $image.src = inputURL.value;
@@ -16,19 +19,18 @@ $photoURL.addEventListener('input', (event) => {
 const $entryForm = document.querySelector('form');
 if (!$entryForm) throw new Error('$entryForm does not exist!');
 const $entryFormInputs = $entryForm.elements;
-// EVENT LISTENER FOR SUBMITTING THE FORM
 $entryForm.addEventListener('submit', (event) => {
+  const newEntry = {
+    entryTitle: $entryFormInputs.title.value,
+    entryPhotoURL: $entryFormInputs.photoURL.value,
+    entryNotes: $entryFormInputs.notes.value,
+    entryID: data.nextEntryId,
+  };
   // if data.editing is null ...
   if (data.editing === null) {
     // prevent the page from refreshing
     event.preventDefault();
     // store the form's input values in a new object + assigns entryID property
-    const newEntry = {
-      entryTitle: $entryFormInputs.title.value,
-      entryPhotoURL: $entryFormInputs.photoURL.value,
-      entryNotes: $entryFormInputs.notes.value,
-      entryID: data.nextEntryId,
-    };
     // increment the nextEntryId property of the data model
     data.nextEntryId++;
     // add the new object to the beginning of the data model's array of entries
@@ -45,6 +47,22 @@ $entryForm.addEventListener('submit', (event) => {
     $ul.prepend(renderEntry(newEntry));
     // show the entries view
     viewSwap('entries');
+  }
+  // if data.entries is not null ...
+  else {
+    // assign entry id value from data.editing to the new object w/updated form values
+    newEntry.entryID = data.editing.entryID;
+    console.log(newEntry.entryID);
+    // replace original object in the data.entries array for the new object w/edited data
+    console.log(data);
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryID === newEntry.entryID) {
+        console.log(data.entries[i]);
+        data.entries[i] = newEntry;
+        console.log(data);
+      }
+    }
+    writeEntry();
   }
 });
 // VIEWING ENTRIES
@@ -169,7 +187,7 @@ const $newEntryButton = document.querySelector('#new-button');
 $newEntryButton?.addEventListener('click', () => {
   viewSwap('entry-form');
 });
-// EVENT LISTENER FOR UL EDITING
+// EDITING THE FORM
 const $ul = document.querySelector('ul');
 if (!$ul) throw new Error('$ul does not exist!');
 const $entryFormTitle = document.querySelector('.entry-form-title');
