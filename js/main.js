@@ -99,10 +99,6 @@ function renderEntry(entry) {
     'data-entry-id',
     String(data.entries.indexOf(entry)),
   );
-  // $newEntryColumnTitle.setAttribute(
-  //   'data-entry-id',
-  //   String(data.entries.indexOf(entry)),
-  // );
   const $newEntryColumnIcon = document.createElement('div');
   $newEntryColumnIcon.setAttribute('class', 'column-half');
   $newEntryColumnIcon.setAttribute('id', 'edit-icon-div');
@@ -233,7 +229,7 @@ $ul?.addEventListener('click', (event) => {
   if (!$deleteButton) throw new Error('$deleteButon does not exist!');
   $deleteButton.className = '';
 });
-// functions for delete modal and delete modal buttons
+// DELETING ENTRIES FROM THE FORM
 const $deleteButton = document.querySelector('#delete-button');
 if (!$deleteButton) throw new Error('$deleteButon does not exist!');
 const $noDelete = document.querySelector('#no-delete');
@@ -241,14 +237,17 @@ if (!$noDelete) throw new Error('$noDelete does not exist!');
 const $yesDelete = document.querySelector('#yes-delete');
 if (!$yesDelete) throw new Error('$yesDelete does not exist!');
 const $deleteEntry = document.querySelector('#delete-entry');
+// bringing up the modal
 $deleteButton.addEventListener('click', (event) => {
   event.preventDefault();
   if (!$deleteEntry) throw new Error('$deleteEntry does not exist!');
   $deleteEntry.showModal();
 });
+// dismiss the modal if users choose not to delete
 $noDelete.addEventListener('click', () => {
   $deleteEntry.close();
 });
+// deleting the entry if users choose to delete
 $yesDelete.addEventListener('click', () => {
   if (data.editing === null) {
     $deleteEntry.close();
@@ -266,15 +265,15 @@ $yesDelete.addEventListener('click', () => {
             data.entries.indexOf($entry) ===
             Number($entryList[i].dataset.entryId)
           ) {
-            data.entries.splice(1, data.entries.indexOf($entry));
+            // remove the entry object from the data.entries array
+            data.entries.splice(data.entries.indexOf($entry), 1);
             // hide the li with the matching data-view-id
-            $entryList[i].classList.add('hidden');
+            $entryList[i].className = 'journal-entry hidden';
           }
+          $deleteEntry.close();
+          viewSwap('entries');
         }
       }
     }
-    toggleNoEntries();
-    $deleteEntry.close();
-    viewSwap('entries');
   }
 });
