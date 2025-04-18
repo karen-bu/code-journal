@@ -46,6 +46,8 @@ $entryForm.addEventListener('submit', (event: Event) => {
 
   // if data.editing is null ...
   if (data.editing === null) {
+    viewSwap('entry-form');
+
     // increment the nextEntryId property of the data model
     data.nextEntryId++;
 
@@ -83,11 +85,10 @@ $entryForm.addEventListener('submit', (event: Event) => {
         // change notes
         const $entryNotesNodeList = document.querySelectorAll('#entry-notes');
         $entryNotesNodeList[i].textContent = data.entries[i].entryNotes;
-
-        data.editing = null;
       }
     }
   }
+  data.editing = null;
   viewSwap('entries');
 });
 
@@ -98,67 +99,52 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
   // creating new entry
   const $newEntry = document.createElement('li');
   $newEntry.setAttribute('class', 'journal-entry');
-  $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
+  $newEntry.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryRow = document.createElement('div');
   $newEntryRow.setAttribute('class', 'row entry');
-  $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
+  $newEntryRow.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryColumnPhoto = document.createElement('div');
   $newEntryColumnPhoto.setAttribute('class', 'column-half entry-img');
+  $newEntryColumnPhoto.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryPhoto = document.createElement('img');
   $newEntryPhoto.setAttribute('src', entry.entryPhotoURL);
   $newEntryPhoto.setAttribute('id', 'entry-img');
+  $newEntryPhoto.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryColumnText = document.createElement('div');
   $newEntryColumnText.setAttribute('class', 'column-half');
-  $newEntryColumnText.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryColumnText.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryRowTitleIcon = document.createElement('div');
   $newEntryRowTitleIcon.setAttribute('class', 'row entry');
+  $newEntryRowTitleIcon.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryColumnTitle = document.createElement('div');
   $newEntryColumnTitle.setAttribute('class', 'column-half');
   $newEntryColumnTitle.setAttribute('id', 'entry-title-div');
-  $newEntryColumnTitle.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryColumnTitle.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryColumnIcon = document.createElement('div');
   $newEntryColumnIcon.setAttribute('class', 'column-half');
   $newEntryColumnIcon.setAttribute('id', 'edit-icon-div');
-  $newEntryColumnIcon.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryColumnIcon.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryTitle = document.createElement('h2');
   $newEntryTitle.textContent = entry.entryTitle;
   $newEntryTitle.setAttribute('class', 'column-half');
   $newEntryTitle.setAttribute('id', 'entry-title');
-  $newEntryTitle.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryTitle.setAttribute('data-entry-id', String(entry.entryID));
 
   const $editEntryImg = document.createElement('i');
   $editEntryImg.setAttribute('class', 'fa-solid fa-pen-to-square edit-img');
-  $editEntryImg.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $editEntryImg.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryNotes = document.createElement('p');
-  $newEntryNotes.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
   $newEntryNotes.setAttribute('id', 'entry-notes');
+  $newEntryNotes.setAttribute('data-entry-id', String(entry.entryID));
   $newEntryNotes.textContent = entry.entryNotes;
 
   // appending new entries to DOM
@@ -240,6 +226,35 @@ $entriesAnchorEntries?.addEventListener('click', (): void => {
 const $newEntryButton = document.querySelector('#new-button');
 $newEntryButton?.addEventListener('click', (): void => {
   viewSwap('entry-form');
+
+  // title of form is "new entry"
+  const $entryFormTitle = document.querySelector('.entry-form-title');
+  if (!$entryFormTitle) throw new Error('$entryFormTitle does not exist!');
+  $entryFormTitle.textContent = 'New Entry';
+
+  // reset the form back to blank
+  const $entryFormInputTitle = document.querySelector(
+    '#title',
+  ) as HTMLFormElement;
+  if (!$entryFormInputTitle)
+    throw new Error('$entryFormInputTitle does not exist!');
+
+  const $photoURL = document.querySelector('#photo-url') as HTMLFormElement;
+  if (!$photoURL) throw new Error('$photoURL does not exist!');
+
+  const $image = document.querySelector('img') as HTMLImageElement;
+  if (!$image) throw new Error('$image does not exist!');
+
+  const $entryFormInputNotes = document.querySelector(
+    '#notes',
+  ) as HTMLFormElement;
+  if (!$entryFormInputNotes)
+    throw new Error('$entryFormInputNotes does not exist!');
+
+  $entryFormInputTitle.value = '';
+  $photoURL.value = '';
+  $image.src = './images/placeholder-image-square.jpg';
+  $entryFormInputNotes.value = '';
 });
 
 // EDITING THE FORM
@@ -253,35 +268,43 @@ if (!$entryFormTitle) throw new Error('$entryFormTitle does not exist!');
 $ul?.addEventListener('click', (event: Event): void => {
   // swaps views to the entry form
   viewSwap('entry-form');
+  data.editing = null;
 
   // find entry object in the data.entries array whose id matches the data-entry-id attribute value of the clicked entry
-  // and assigns that entry’s object to the data.editing property
+  const editTarget = event.target as HTMLLIElement;
+  const dataEntryID = Number(editTarget?.dataset.entryId);
 
-  const editIcon = event.target as HTMLLIElement;
-  const dataEntryID = Number(editIcon?.dataset.entryId);
-  data.editing = data.entries[dataEntryID];
+  for (let i = 0; i < data.entries.length; i++) {
+    if (dataEntryID === data.entries[i].entryID) {
+      // assigns that entry’s object to the data.editing property
+      data.editing = data.entries[i];
 
-  // pre-populate the entry form with the clicked entry's values
-  const $entryFormInputTitle = document.querySelector(
-    '#title',
-  ) as HTMLFormElement;
-  if (!$entryFormInputTitle)
-    throw new Error('$entryFormInputTitle does not exist!');
-  const $photoURL = document.querySelector('#photo-url') as HTMLFormElement;
-  if (!$photoURL) throw new Error('$photoURL does not exist!');
-  const $image = document.querySelector('img') as HTMLImageElement;
-  if (!$image) throw new Error('$image does not exist!');
-  const $entryFormInputNotes = document.querySelector(
-    '#notes',
-  ) as HTMLFormElement;
-  if (!$entryFormInputNotes)
-    throw new Error('$entryFormInputNotes does not exist!');
+      // query for all elements to be autofilled
+      const $entryFormInputTitle = document.querySelector(
+        '#title',
+      ) as HTMLFormElement;
+      if (!$entryFormInputTitle)
+        throw new Error('$entryFormInputTitle does not exist!');
 
-  $entryFormInputTitle.value = data.editing.entryTitle;
-  $photoURL.value = data.editing.entryPhotoURL;
-  $image.src = data.editing.entryPhotoURL;
-  $entryFormInputNotes.value = data.editing.entryNotes;
+      const $photoURL = document.querySelector('#photo-url') as HTMLFormElement;
+      if (!$photoURL) throw new Error('$photoURL does not exist!');
 
+      const $image = document.querySelector('img') as HTMLImageElement;
+      if (!$image) throw new Error('$image does not exist!');
+
+      const $entryFormInputNotes = document.querySelector(
+        '#notes',
+      ) as HTMLFormElement;
+      if (!$entryFormInputNotes)
+        throw new Error('$entryFormInputNotes does not exist!');
+
+      // pre-populate the entry form with the clicked entry's values
+      $entryFormInputTitle.value = data.editing.entryTitle;
+      $photoURL.value = data.editing.entryPhotoURL;
+      $image.src = data.editing.entryPhotoURL;
+      $entryFormInputNotes.value = data.editing.entryNotes;
+    }
+  }
   // changes the title of the entry form to 'Edit Entry'
   $entryFormTitle.textContent = 'Edit Entry';
 
@@ -315,6 +338,7 @@ $deleteButton.addEventListener('click', (event: Event) => {
 // dismiss the modal if users choose not to delete
 $noDelete.addEventListener('click', () => {
   $deleteEntry.close();
+  data.editing = null;
 });
 
 // deleting the entry if users choose to delete
@@ -322,29 +346,27 @@ $yesDelete.addEventListener('click', () => {
   if (data.editing === null) {
     $deleteEntry.close();
   } else {
-    for (const i in data.entries) {
+    for (let i = 0; i < data.entries.length; i++) {
       // if the entryIDs match up ...
       if (data.editing.entryID === data.entries[i].entryID) {
-        const $entry = data.entries[i];
+        const entryToDelete = data.entries[i];
         // find all li elements
         const $entryList = document.querySelectorAll('li');
+
+        // find the object with the matching entryIDs
         for (let i = 0; i < $entryList.length; i++) {
-          // find the index of the object with the matching entryIDs
-          // find the li with the matching data-view-id in the nodeList
-          if (
-            data.entries.indexOf($entry) ===
-            Number($entryList[i].dataset.entryId)
-          ) {
+          if (Number($entryList[i].dataset.entryId) === data.editing.entryID) {
             // remove the entry object from the data.entries array
-            data.entries.splice(data.entries.indexOf($entry), 1);
+            data.entries.splice(data.entries.indexOf(entryToDelete), 1);
+
             // removes the li with the matching data-view-id
             $entryList[i].remove();
-            $deleteEntry.close();
           }
         }
+        $deleteEntry.close();
       }
     }
-    data.editing = null;
   }
+  data.editing = null;
   viewSwap('entries');
 });
