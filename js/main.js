@@ -51,19 +51,15 @@ $entryForm.addEventListener('submit', (event) => {
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryID === newEntry.entryID) {
         data.entries[i] = newEntry;
-        // replace in place for DOM elements by re-querying and updating
-        const $editedEntryTitle = document.querySelector('#entry-title');
-        if (!$editedEntryTitle)
-          throw new Error('$editedEntryTitle does not exist!');
-        $editedEntryTitle.textContent = data.entries[i].entryTitle;
-        const $editedEntryImg = document.querySelector('#entry-img');
-        if (!$editedEntryImg)
-          throw new Error('$editedEntryImg does not exist!');
-        $editedEntryImg.setAttribute('src', data.entries[i].entryPhotoURL);
-        const $editedEntryNotes = document.querySelector('#entry-notes');
-        if (!$editedEntryNotes)
-          throw new Error('$editedEntryNotes does not exist!');
-        $editedEntryNotes.textContent = newEntry.entryNotes;
+        // change image
+        const $entryImgNodeList = document.querySelectorAll('#entry-img');
+        $entryImgNodeList[i].setAttribute('src', data.entries[i].entryPhotoURL);
+        // change title
+        const $entryTitleNodeList = document.querySelectorAll('#entry-title');
+        $entryTitleNodeList[i].textContent = data.entries[i].entryTitle;
+        // change notes
+        const $entryNotesNodeList = document.querySelectorAll('#entry-notes');
+        $entryNotesNodeList[i].textContent = data.entries[i].entryNotes;
       }
       data.editing = null;
     }
@@ -76,7 +72,7 @@ function renderEntry(entry) {
   // creating new entry
   const $newEntry = document.createElement('li');
   $newEntry.setAttribute('class', 'journal-entry');
-  // $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
+  $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
   const $newEntryRow = document.createElement('div');
   $newEntryRow.setAttribute('class', 'row entry');
   const $newEntryColumnPhoto = document.createElement('div');
@@ -103,6 +99,10 @@ function renderEntry(entry) {
     'data-entry-id',
     String(data.entries.indexOf(entry)),
   );
+  // $newEntryColumnTitle.setAttribute(
+  //   'data-entry-id',
+  //   String(data.entries.indexOf(entry)),
+  // );
   const $newEntryColumnIcon = document.createElement('div');
   $newEntryColumnIcon.setAttribute('class', 'column-half');
   $newEntryColumnIcon.setAttribute('id', 'edit-icon-div');
@@ -162,9 +162,9 @@ function toggleNoEntries() {
   if (!$noEntryDiv) throw new Error('$noEntryDiv does not exist!');
   if (data.view === 'entry-form') {
     $noEntryDiv.className = 'column-full no-entries hidden';
-  } else if (data.view === 'entries' && data.nextEntryId <= 1) {
+  } else if (data.view === 'entries' && data.entries.length === 0) {
     $noEntryDiv.className = 'column-full no-entries';
-  } else if (data.view === 'entries' && data.nextEntryId > 1) {
+  } else if (data.view === 'entries' && data.entries.length > 0) {
     $noEntryDiv.className = 'column-full no-entries hidden';
   } else {
     readEntry();
@@ -233,4 +233,48 @@ $ul?.addEventListener('click', (event) => {
   if (!$deleteButton) throw new Error('$deleteButon does not exist!');
   $deleteButton.className = '';
 });
-// add delete button which is only visible when an entry is being edited
+// functions for delete modal and delete modal buttons
+const $deleteButton = document.querySelector('#delete-button');
+if (!$deleteButton) throw new Error('$deleteButon does not exist!');
+const $noDelete = document.querySelector('#no-delete');
+if (!$noDelete) throw new Error('$noDelete does not exist!');
+const $yesDelete = document.querySelector('#yes-delete');
+if (!$yesDelete) throw new Error('$yesDelete does not exist!');
+const $deleteEntry = document.querySelector('#delete-entry');
+$deleteButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (!$deleteEntry) throw new Error('$deleteEntry does not exist!');
+  $deleteEntry.showModal();
+});
+$noDelete.addEventListener('click', () => {
+  $deleteEntry.close();
+});
+$yesDelete.addEventListener('click', () => {
+  if (data.editing === null) {
+    $deleteEntry.close();
+  } else {
+    for (const i in data.entries) {
+      // if the entryIDs match up ...
+      if (data.editing.entryID === data.entries[i].entryID) {
+        const $entry = data.entries[i];
+        // find all li elements
+        const $entryList = document.querySelectorAll('li');
+        for (let i = 0; i < $entryList.length; i++) {
+          // find the index of the object with the matching entryIDs
+          // find the li with the matching data-view-id in the nodeList
+          if (
+            data.entries.indexOf($entry) ===
+            Number($entryList[i].dataset.entryId)
+          ) {
+            data.entries.splice(1, data.entries.indexOf($entry));
+            // hide the li with the matching data-view-id
+            $entryList[i].classList.add('hidden');
+          }
+        }
+      }
+    }
+    toggleNoEntries();
+    $deleteEntry.close();
+    viewSwap('entries');
+  }
+});
