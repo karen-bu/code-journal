@@ -36,6 +36,7 @@ const $entryFormInputs = $entryForm.elements as FormElements;
 $entryForm.addEventListener('submit', (event: Event) => {
   event.preventDefault();
 
+  // store the form's input values in a new object + assigns entryID property
   const newEntry: JournalEntry = {
     entryTitle: $entryFormInputs.title.value,
     entryPhotoURL: $entryFormInputs.photoURL.value,
@@ -45,8 +46,6 @@ $entryForm.addEventListener('submit', (event: Event) => {
 
   // if data.editing is null ...
   if (data.editing === null) {
-    // store the form's input values in a new object + assigns entryID property
-
     // increment the nextEntryId property of the data model
     data.nextEntryId++;
 
@@ -84,8 +83,9 @@ $entryForm.addEventListener('submit', (event: Event) => {
         // change notes
         const $entryNotesNodeList = document.querySelectorAll('#entry-notes');
         $entryNotesNodeList[i].textContent = data.entries[i].entryNotes;
+
+        data.editing = null;
       }
-      data.editing = null;
     }
   }
   viewSwap('entries');
@@ -102,6 +102,7 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
 
   const $newEntryRow = document.createElement('div');
   $newEntryRow.setAttribute('class', 'row entry');
+  $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
 
   const $newEntryColumnPhoto = document.createElement('div');
   $newEntryColumnPhoto.setAttribute('class', 'column-half entry-img');
@@ -119,10 +120,6 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
 
   const $newEntryRowTitleIcon = document.createElement('div');
   $newEntryRowTitleIcon.setAttribute('class', 'row entry');
-  $newEntryRowTitleIcon.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
 
   const $newEntryColumnTitle = document.createElement('div');
   $newEntryColumnTitle.setAttribute('class', 'column-half');
@@ -340,13 +337,14 @@ $yesDelete.addEventListener('click', () => {
           ) {
             // remove the entry object from the data.entries array
             data.entries.splice(data.entries.indexOf($entry), 1);
-            // hide the li with the matching data-view-id
-            $entryList[i].className = 'journal-entry hidden';
+            // removes the li with the matching data-view-id
+            $entryList[i].remove();
+            $deleteEntry.close();
           }
-          $deleteEntry.close();
-          viewSwap('entries');
         }
       }
     }
+    data.editing = null;
   }
+  viewSwap('entries');
 });

@@ -21,6 +21,7 @@ if (!$entryForm) throw new Error('$entryForm does not exist!');
 const $entryFormInputs = $entryForm.elements;
 $entryForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  // store the form's input values in a new object + assigns entryID property
   const newEntry = {
     entryTitle: $entryFormInputs.title.value,
     entryPhotoURL: $entryFormInputs.photoURL.value,
@@ -29,7 +30,6 @@ $entryForm.addEventListener('submit', (event) => {
   };
   // if data.editing is null ...
   if (data.editing === null) {
-    // store the form's input values in a new object + assigns entryID property
     // increment the nextEntryId property of the data model
     data.nextEntryId++;
     // add the new object to the beginning of the data model's array of entries
@@ -60,8 +60,8 @@ $entryForm.addEventListener('submit', (event) => {
         // change notes
         const $entryNotesNodeList = document.querySelectorAll('#entry-notes');
         $entryNotesNodeList[i].textContent = data.entries[i].entryNotes;
+        data.editing = null;
       }
-      data.editing = null;
     }
   }
   viewSwap('entries');
@@ -75,6 +75,7 @@ function renderEntry(entry) {
   $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
   const $newEntryRow = document.createElement('div');
   $newEntryRow.setAttribute('class', 'row entry');
+  $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
   const $newEntryColumnPhoto = document.createElement('div');
   $newEntryColumnPhoto.setAttribute('class', 'column-half entry-img');
   const $newEntryPhoto = document.createElement('img');
@@ -88,10 +89,6 @@ function renderEntry(entry) {
   );
   const $newEntryRowTitleIcon = document.createElement('div');
   $newEntryRowTitleIcon.setAttribute('class', 'row entry');
-  $newEntryRowTitleIcon.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
   const $newEntryColumnTitle = document.createElement('div');
   $newEntryColumnTitle.setAttribute('class', 'column-half');
   $newEntryColumnTitle.setAttribute('id', 'entry-title-div');
@@ -267,13 +264,14 @@ $yesDelete.addEventListener('click', () => {
           ) {
             // remove the entry object from the data.entries array
             data.entries.splice(data.entries.indexOf($entry), 1);
-            // hide the li with the matching data-view-id
-            $entryList[i].className = 'journal-entry hidden';
+            // removes the li with the matching data-view-id
+            $entryList[i].remove();
+            $deleteEntry.close();
           }
-          $deleteEntry.close();
-          viewSwap('entries');
         }
       }
     }
+    data.editing = null;
   }
+  viewSwap('entries');
 });
