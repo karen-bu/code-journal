@@ -34,6 +34,8 @@ if (!$entryForm) throw new Error('$entryForm does not exist!');
 const $entryFormInputs = $entryForm.elements as FormElements;
 
 $entryForm.addEventListener('submit', (event: Event) => {
+  event.preventDefault();
+
   const newEntry: JournalEntry = {
     entryTitle: $entryFormInputs.title.value,
     entryPhotoURL: $entryFormInputs.photoURL.value,
@@ -43,9 +45,6 @@ $entryForm.addEventListener('submit', (event: Event) => {
 
   // if data.editing is null ...
   if (data.editing === null) {
-    // prevent the page from refreshing
-    event.preventDefault();
-
     // store the form's input values in a new object + assigns entryID property
 
     // increment the nextEntryId property of the data model
@@ -60,31 +59,40 @@ $entryForm.addEventListener('submit', (event: Event) => {
     // reset the form
     $entryForm.reset();
 
-    // write the modified data model to localStorage
-    writeEntry();
-
     // render a DOM tree for the newly submitted entry object
     const $ul = document.querySelector('ul');
     if (!$ul) throw new Error('$ul does not exist!');
     $ul.prepend(renderEntry(newEntry));
-
-    // show the entries view
-    viewSwap('entries');
   }
   // if data.entries is not null ...
   else {
     // assign entry id value from data.editing to the new object w/updated form values
     newEntry.entryID = data.editing.entryID;
-    console.log(newEntry.entryID);
     // replace original object in the data.entries array for the new object w/edited data
-    console.log(data);
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryID === newEntry.entryID) {
         data.entries[i] = newEntry;
+
+        // replace in place for DOM elements by re-querying and updating
+        const $editedEntryTitle = document.querySelector('#entry-title');
+        if (!$editedEntryTitle)
+          throw new Error('$editedEntryTitle does not exist!');
+        $editedEntryTitle.textContent = data.entries[i].entryTitle;
+
+        const $editedEntryImg = document.querySelector('#entry-img');
+        if (!$editedEntryImg)
+          throw new Error('$editedEntryImg does not exist!');
+        $editedEntryImg.setAttribute('src', data.entries[i].entryPhotoURL);
+
+        const $editedEntryNotes = document.querySelector('#entry-notes');
+        if (!$editedEntryNotes)
+          throw new Error('$editedEntryNotes does not exist!');
+        $editedEntryNotes.textContent = newEntry.entryNotes;
       }
+      data.editing = null;
     }
-    writeEntry();
   }
+  viewSwap('entries');
 });
 
 // VIEWING ENTRIES
@@ -94,7 +102,7 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
   // creating new entry
   const $newEntry = document.createElement('li');
   $newEntry.setAttribute('class', 'journal-entry');
-  $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
+  // $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
 
   const $newEntryRow = document.createElement('div');
   $newEntryRow.setAttribute('class', 'row entry');
@@ -104,6 +112,7 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
 
   const $newEntryPhoto = document.createElement('img');
   $newEntryPhoto.setAttribute('src', entry.entryPhotoURL);
+  $newEntryPhoto.setAttribute('id', 'entry-img');
 
   const $newEntryColumnText = document.createElement('div');
   $newEntryColumnText.setAttribute('class', 'column-half');
@@ -121,22 +130,25 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
 
   const $newEntryColumnTitle = document.createElement('div');
   $newEntryColumnTitle.setAttribute('class', 'column-half');
+  $newEntryColumnTitle.setAttribute('id', 'entry-title-div');
   $newEntryColumnTitle.setAttribute(
     'data-entry-id',
     String(data.entries.indexOf(entry)),
   );
 
   const $newEntryColumnIcon = document.createElement('div');
-  $newEntryColumnIcon.setAttribute('class', 'column-full');
+  $newEntryColumnIcon.setAttribute('class', 'column-half');
+  $newEntryColumnIcon.setAttribute('id', 'edit-icon-div');
   $newEntryColumnIcon.setAttribute(
     'data-entry-id',
     String(data.entries.indexOf(entry)),
   );
 
-  const $newEntryHeading = document.createElement('h2');
-  $newEntryHeading.textContent = entry.entryTitle;
-  $newEntryHeading.setAttribute('class', 'column-half');
-  $newEntryHeading.setAttribute(
+  const $newEntryTitle = document.createElement('h2');
+  $newEntryTitle.textContent = entry.entryTitle;
+  $newEntryTitle.setAttribute('class', 'column-half');
+  $newEntryTitle.setAttribute('id', 'entry-title');
+  $newEntryTitle.setAttribute(
     'data-entry-id',
     String(data.entries.indexOf(entry)),
   );
@@ -153,6 +165,7 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
     'data-entry-id',
     String(data.entries.indexOf(entry)),
   );
+  $newEntryNotes.setAttribute('id', 'entry-notes');
   $newEntryNotes.textContent = entry.entryNotes;
 
   // appending new entries to DOM
@@ -166,11 +179,10 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
   // column for second half of entry
   $newEntryRow?.appendChild($newEntryColumnText);
 
-  // // column to hold title + icon
+  // column to hold title + icon
   $newEntryColumnText?.appendChild($newEntryRowTitleIcon);
-
   $newEntryRowTitleIcon?.appendChild($newEntryColumnTitle);
-  $newEntryColumnTitle?.appendChild($newEntryHeading);
+  $newEntryColumnTitle?.appendChild($newEntryTitle);
   $newEntryRowTitleIcon?.appendChild($newEntryColumnIcon);
   $newEntryColumnIcon?.appendChild($editEntryImg);
 
@@ -221,6 +233,7 @@ function viewSwap(viewName: any): void {
     $entryList.className = 'view entrylist hidden';
     data.view = 'entry-form';
   }
+  writeEntry();
   toggleNoEntries();
 }
 

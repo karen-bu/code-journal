@@ -4,11 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  background-color: #f0f0f0;
-}
-
 /* ROW + COLUMN STYLES */
 
 .hidden {
@@ -79,48 +74,13 @@ body {
   }
 }
 
-header {
-  background-color: #562b81;
-  color: white;
-  padding: 1px;
-}
-
 .no-entries {
   text-align: center;
 }
 
-.entries-anchor {
-  color: white;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: bolder;
-  padding-top: 8px;
-}
-
 /* FONT + IMG STYLES */
 
-h1,
-h2 {
-  font-family: 'Proza Libre', sans-serif;
-  font-weight: lighter;
-}
-
-h3 {
-  font-family: 'Proza Libre', sans-serif;
-  font-size: 12pt;
-}
-
-@media screen and (width < 1024px) {
-  h1,
-  h2,
-  h3 {
-    text-align: center;
-  }
-}
-
-p {
-  font-family: 'Open Sans', sans-serif;
-}
-
+/* UNCHANGED STYLES */
 ul {
   list-style: none;
   margin: 0;
@@ -159,6 +119,62 @@ i {
   .entry-img {
     margin-right: 0;
   }
+}
+
+@media screen and (width < 1024px) {
+  #entry-title-div {
+    width: 80%;
+  }
+
+  #edit-icon-div {
+    width: 20%;
+  }
+}
+
+/* THEME STYLES */
+
+body {
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+header {
+  background-color: #562b81;
+  color: white;
+  padding: 1px;
+}
+
+.entries-anchor {
+  padding-top: 8px;
+}
+
+.entries-anchor.text {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bolder;
+}
+
+h1,
+h2 {
+  font-family: 'Proza Libre', sans-serif;
+  font-weight: lighter;
+}
+
+h3 {
+  font-family: 'Proza Libre', sans-serif;
+  font-size: 12pt;
+}
+
+@media screen and (width < 1024px) {
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
 }
 
 button {
