@@ -228,4 +228,9 @@ $ul?.addEventListener('click', (event) => {
   $entryFormInputNotes.value = data.editing.entryNotes;
   // changes the title of the entry form to 'Edit Entry'
   $entryFormTitle.textContent = 'Edit Entry';
+  // delete button shows up
+  const $deleteButton = document.querySelector('#delete-button');
+  if (!$deleteButton) throw new Error('$deleteButon does not exist!');
+  $deleteButton.className = '';
 });
+// add delete button which is only visible when an entry is being edited

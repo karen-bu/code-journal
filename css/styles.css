@@ -177,14 +177,25 @@ p {
   font-family: 'Open Sans', sans-serif;
 }
 
-button {
+#submit-button,
+#delete-button,
+#new-button {
   font-family: 'Open Sans', sans-serif;
-  float: right;
   color: white;
   background-color: #562b81;
   height: 40px;
-  width: 55px;
+  width: 70px;
   border-radius: 10px;
+  text-align: center;
+}
+
+#submit-button,
+#new-button {
+  float: right;
+}
+
+#delete-button {
+  float: left;
 }
 
 #new-button {

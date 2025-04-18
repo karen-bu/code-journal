@@ -25,6 +25,7 @@
   </head>
 
   <body>
+    <!-- header -->
     <header>
       <div class="container">
         <div class="row header">
@@ -41,6 +42,7 @@
     </header>
 
     <main class="container">
+      <!-- entry form -->
       <div class="view entryform hidden" data-view="entry-form">
         <div class="row">
           <div class="column-full">
@@ -80,8 +82,11 @@
           </div>
 
           <div class="row">
-            <div class="column-full">
+            <div class="column-half">
               <button id="submit-button">SAVE</button>
+            </div>
+            <div class="column-half">
+              <button id="delete-button" class="hidden">DELETE</button>
             </div>
           </div>
         </form>
@@ -92,8 +97,8 @@
         <!-- subheader + button -->
         <div class="row subheader">
           <div class="column-half subheader"><h1>Entries</h1></div>
-          <div class="column-half subheader" id="new-button">
-            <button>NEW</button>
+          <div class="column-half subheader">
+            <button id="new-button">NEW</button>
           </div>
         </div>
 
