@@ -21,6 +21,7 @@ if (!$entryForm) throw new Error('$entryForm does not exist!');
 const $entryFormInputs = $entryForm.elements;
 $entryForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  // store the form's input values in a new object + assigns entryID property
   const newEntry = {
     entryTitle: $entryFormInputs.title.value,
     entryPhotoURL: $entryFormInputs.photoURL.value,
@@ -29,7 +30,7 @@ $entryForm.addEventListener('submit', (event) => {
   };
   // if data.editing is null ...
   if (data.editing === null) {
-    // store the form's input values in a new object + assigns entryID property
+    viewSwap('entry-form');
     // increment the nextEntryId property of the data model
     data.nextEntryId++;
     // add the new object to the beginning of the data model's array of entries
@@ -51,23 +52,19 @@ $entryForm.addEventListener('submit', (event) => {
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryID === newEntry.entryID) {
         data.entries[i] = newEntry;
-        // replace in place for DOM elements by re-querying and updating
-        const $editedEntryTitle = document.querySelector('#entry-title');
-        if (!$editedEntryTitle)
-          throw new Error('$editedEntryTitle does not exist!');
-        $editedEntryTitle.textContent = data.entries[i].entryTitle;
-        const $editedEntryImg = document.querySelector('#entry-img');
-        if (!$editedEntryImg)
-          throw new Error('$editedEntryImg does not exist!');
-        $editedEntryImg.setAttribute('src', data.entries[i].entryPhotoURL);
-        const $editedEntryNotes = document.querySelector('#entry-notes');
-        if (!$editedEntryNotes)
-          throw new Error('$editedEntryNotes does not exist!');
-        $editedEntryNotes.textContent = newEntry.entryNotes;
+        // change image
+        const $entryImgNodeList = document.querySelectorAll('#entry-img');
+        $entryImgNodeList[i].setAttribute('src', data.entries[i].entryPhotoURL);
+        // change title
+        const $entryTitleNodeList = document.querySelectorAll('#entry-title');
+        $entryTitleNodeList[i].textContent = data.entries[i].entryTitle;
+        // change notes
+        const $entryNotesNodeList = document.querySelectorAll('#entry-notes');
+        $entryNotesNodeList[i].textContent = data.entries[i].entryNotes;
       }
-      data.editing = null;
     }
   }
+  data.editing = null;
   viewSwap('entries');
 });
 // VIEWING ENTRIES
@@ -76,60 +73,42 @@ function renderEntry(entry) {
   // creating new entry
   const $newEntry = document.createElement('li');
   $newEntry.setAttribute('class', 'journal-entry');
-  // $newEntry.setAttribute('data-entry-id', String(data.entries.indexOf(entry)));
+  $newEntry.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryRow = document.createElement('div');
   $newEntryRow.setAttribute('class', 'row entry');
+  $newEntryRow.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryColumnPhoto = document.createElement('div');
   $newEntryColumnPhoto.setAttribute('class', 'column-half entry-img');
+  $newEntryColumnPhoto.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryPhoto = document.createElement('img');
   $newEntryPhoto.setAttribute('src', entry.entryPhotoURL);
   $newEntryPhoto.setAttribute('id', 'entry-img');
+  $newEntryPhoto.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryColumnText = document.createElement('div');
   $newEntryColumnText.setAttribute('class', 'column-half');
-  $newEntryColumnText.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryColumnText.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryRowTitleIcon = document.createElement('div');
   $newEntryRowTitleIcon.setAttribute('class', 'row entry');
-  $newEntryRowTitleIcon.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryRowTitleIcon.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryColumnTitle = document.createElement('div');
   $newEntryColumnTitle.setAttribute('class', 'column-half');
   $newEntryColumnTitle.setAttribute('id', 'entry-title-div');
-  $newEntryColumnTitle.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryColumnTitle.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryColumnIcon = document.createElement('div');
   $newEntryColumnIcon.setAttribute('class', 'column-half');
   $newEntryColumnIcon.setAttribute('id', 'edit-icon-div');
-  $newEntryColumnIcon.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryColumnIcon.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryTitle = document.createElement('h2');
   $newEntryTitle.textContent = entry.entryTitle;
   $newEntryTitle.setAttribute('class', 'column-half');
   $newEntryTitle.setAttribute('id', 'entry-title');
-  $newEntryTitle.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $newEntryTitle.setAttribute('data-entry-id', String(entry.entryID));
   const $editEntryImg = document.createElement('i');
   $editEntryImg.setAttribute('class', 'fa-solid fa-pen-to-square edit-img');
-  $editEntryImg.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
+  $editEntryImg.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryNotes = document.createElement('p');
-  $newEntryNotes.setAttribute(
-    'data-entry-id',
-    String(data.entries.indexOf(entry)),
-  );
   $newEntryNotes.setAttribute('id', 'entry-notes');
+  $newEntryNotes.setAttribute('data-entry-id', String(entry.entryID));
   $newEntryNotes.textContent = entry.entryNotes;
   // appending new entries to DOM
   // entry row
@@ -162,9 +141,9 @@ function toggleNoEntries() {
   if (!$noEntryDiv) throw new Error('$noEntryDiv does not exist!');
   if (data.view === 'entry-form') {
     $noEntryDiv.className = 'column-full no-entries hidden';
-  } else if (data.view === 'entries' && data.nextEntryId <= 1) {
+  } else if (data.view === 'entries' && data.entries.length === 0) {
     $noEntryDiv.className = 'column-full no-entries';
-  } else if (data.view === 'entries' && data.nextEntryId > 1) {
+  } else if (data.view === 'entries' && data.entries.length > 0) {
     $noEntryDiv.className = 'column-full no-entries hidden';
   } else {
     readEntry();
@@ -197,21 +176,11 @@ $entriesAnchorEntries?.addEventListener('click', () => {
 const $newEntryButton = document.querySelector('#new-button');
 $newEntryButton?.addEventListener('click', () => {
   viewSwap('entry-form');
-});
-// EDITING THE FORM
-const $ul = document.querySelector('ul');
-if (!$ul) throw new Error('$ul does not exist!');
-const $entryFormTitle = document.querySelector('.entry-form-title');
-if (!$entryFormTitle) throw new Error('$entryFormTitle does not exist!');
-$ul?.addEventListener('click', (event) => {
-  // swaps views to the entry form
-  viewSwap('entry-form');
-  // find entry object in the data.entries array whose id matches the data-entry-id attribute value of the clicked entry
-  // and assigns that entry’s object to the data.editing property
-  const editIcon = event.target;
-  const dataEntryID = Number(editIcon?.dataset.entryId);
-  data.editing = data.entries[dataEntryID];
-  // pre-populate the entry form with the clicked entry's values
+  // title of form is "new entry"
+  const $entryFormTitle = document.querySelector('.entry-form-title');
+  if (!$entryFormTitle) throw new Error('$entryFormTitle does not exist!');
+  $entryFormTitle.textContent = 'New Entry';
+  // reset the form back to blank
   const $entryFormInputTitle = document.querySelector('#title');
   if (!$entryFormInputTitle)
     throw new Error('$entryFormInputTitle does not exist!');
@@ -222,10 +191,95 @@ $ul?.addEventListener('click', (event) => {
   const $entryFormInputNotes = document.querySelector('#notes');
   if (!$entryFormInputNotes)
     throw new Error('$entryFormInputNotes does not exist!');
-  $entryFormInputTitle.value = data.editing.entryTitle;
-  $photoURL.value = data.editing.entryPhotoURL;
-  $image.src = data.editing.entryPhotoURL;
-  $entryFormInputNotes.value = data.editing.entryNotes;
+  $entryFormInputTitle.value = '';
+  $photoURL.value = '';
+  $image.src = './images/placeholder-image-square.jpg';
+  $entryFormInputNotes.value = '';
+});
+// EDITING THE FORM
+const $ul = document.querySelector('ul');
+if (!$ul) throw new Error('$ul does not exist!');
+const $entryFormTitle = document.querySelector('.entry-form-title');
+if (!$entryFormTitle) throw new Error('$entryFormTitle does not exist!');
+$ul?.addEventListener('click', (event) => {
+  // swaps views to the entry form
+  viewSwap('entry-form');
+  data.editing = null;
+  // find entry object in the data.entries array whose id matches the data-entry-id attribute value of the clicked entry
+  const editTarget = event.target;
+  const dataEntryID = Number(editTarget?.dataset.entryId);
+  for (let i = 0; i < data.entries.length; i++) {
+    if (dataEntryID === data.entries[i].entryID) {
+      // assigns that entry’s object to the data.editing property
+      data.editing = data.entries[i];
+      // query for all elements to be autofilled
+      const $entryFormInputTitle = document.querySelector('#title');
+      if (!$entryFormInputTitle)
+        throw new Error('$entryFormInputTitle does not exist!');
+      const $photoURL = document.querySelector('#photo-url');
+      if (!$photoURL) throw new Error('$photoURL does not exist!');
+      const $image = document.querySelector('img');
+      if (!$image) throw new Error('$image does not exist!');
+      const $entryFormInputNotes = document.querySelector('#notes');
+      if (!$entryFormInputNotes)
+        throw new Error('$entryFormInputNotes does not exist!');
+      // pre-populate the entry form with the clicked entry's values
+      $entryFormInputTitle.value = data.editing.entryTitle;
+      $photoURL.value = data.editing.entryPhotoURL;
+      $image.src = data.editing.entryPhotoURL;
+      $entryFormInputNotes.value = data.editing.entryNotes;
+    }
+  }
   // changes the title of the entry form to 'Edit Entry'
   $entryFormTitle.textContent = 'Edit Entry';
+  // delete button shows up
+  const $deleteButton = document.querySelector('#delete-button');
+  if (!$deleteButton) throw new Error('$deleteButon does not exist!');
+  $deleteButton.className = '';
+});
+// DELETING ENTRIES FROM THE FORM
+const $deleteButton = document.querySelector('#delete-button');
+if (!$deleteButton) throw new Error('$deleteButon does not exist!');
+const $noDelete = document.querySelector('#no-delete');
+if (!$noDelete) throw new Error('$noDelete does not exist!');
+const $yesDelete = document.querySelector('#yes-delete');
+if (!$yesDelete) throw new Error('$yesDelete does not exist!');
+const $deleteEntry = document.querySelector('#delete-entry');
+// bringing up the modal
+$deleteButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (!$deleteEntry) throw new Error('$deleteEntry does not exist!');
+  $deleteEntry.showModal();
+});
+// dismiss the modal if users choose not to delete
+$noDelete.addEventListener('click', () => {
+  $deleteEntry.close();
+  data.editing = null;
+});
+// deleting the entry if users choose to delete
+$yesDelete.addEventListener('click', () => {
+  if (data.editing === null) {
+    $deleteEntry.close();
+  } else {
+    for (let i = 0; i < data.entries.length; i++) {
+      // if the entryIDs match up ...
+      if (data.editing.entryID === data.entries[i].entryID) {
+        const entryToDelete = data.entries[i];
+        // find all li elements
+        const $entryList = document.querySelectorAll('li');
+        // find the object with the matching entryIDs
+        for (let i = 0; i < $entryList.length; i++) {
+          if (Number($entryList[i].dataset.entryId) === data.editing.entryID) {
+            // remove the entry object from the data.entries array
+            data.entries.splice(data.entries.indexOf(entryToDelete), 1);
+            // removes the li with the matching data-view-id
+            $entryList[i].remove();
+          }
+        }
+        $deleteEntry.close();
+      }
+    }
+  }
+  data.editing = null;
+  viewSwap('entries');
 });

@@ -35,12 +35,16 @@
   width: 100%;
 }
 
-.column-half-img {
+.column-half.form-img {
   margin-right: 2rem;
 }
 
+.column-half.entry-img {
+  max-width: 100%;
+}
+
 @media screen and (width < 1024px) {
-  .column-half-img {
+  .column-half.form-img {
     margin-right: 0;
   }
 }
@@ -118,6 +122,7 @@ i {
 @media screen and (width < 1024px) {
   .entry-img {
     margin-right: 0;
+    max-width: 100%;
   }
 }
 
@@ -160,6 +165,10 @@ h2 {
   font-weight: lighter;
 }
 
+h2.delete-heading {
+  text-align: center;
+}
+
 h3 {
   font-family: 'Proza Libre', sans-serif;
   font-size: 12pt;
@@ -177,18 +186,38 @@ p {
   font-family: 'Open Sans', sans-serif;
 }
 
-button {
+p.delete-text {
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+#submit-button,
+#delete-button,
+#new-button,
+#no-delete,
+#yes-delete {
   font-family: 'Open Sans', sans-serif;
-  float: right;
   color: white;
   background-color: #562b81;
   height: 40px;
-  width: 55px;
+  width: 70px;
   border-radius: 10px;
+  text-align: center;
+}
+
+#submit-button,
+#new-button,
+#yes-delete {
+  float: right;
+}
+
+#delete-button,
+#no-delete {
+  float: left;
 }
 
 #new-button {
-  margin-top: 20px;
+  margin: 20px;
 }
 
 input,
@@ -212,4 +241,9 @@ input:focus,
 textarea:focus {
   outline: none;
   border: 2px solid #562b81;
+}
+
+#delete-entry {
+  border: 3px solid #562b81;
+  border-radius: 20px;
 }
