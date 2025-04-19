@@ -1,0 +1,136 @@
+/* STANDARD THEME */
+
+body.background.standard {
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+header.background.standard {
+  background-color: #562b81;
+  color: white;
+  padding: 1px;
+}
+
+h1.font.standard,
+h2.font.standard {
+  font-family: 'Proza Libre', sans-serif;
+  font-weight: lighter;
+}
+
+h3.font.standard {
+  font-family: 'Proza Libre', sans-serif;
+  font-size: 12pt;
+}
+
+h3.header-text.font.standard,
+h3.header-text.font.standard > a {
+  color: #fff;
+}
+
+p.font.standard {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#submit-button.button.standard,
+#delete-button.button.standard,
+#new-button.button.standard,
+#no-delete.button.standard,
+#yes-delete.button.standard {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: #562b81;
+  height: 40px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input.background.standard,
+textarea.background.standard {
+  margin-bottom: 20px;
+  border: 1px solid #b6b6b6;
+  border-radius: 4px;
+}
+
+input:focus.background.standard,
+textarea:focus.background.standard {
+  outline: none;
+  border: 2px solid #562b81;
+}
+
+#delete-entry.background.standard {
+  border: 3px solid #562b81;
+  border-radius: 20px;
+}
+
+/* CUTE THEME */
+body.background.cute {
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+header.background.cute {
+  background-color: #562b81;
+  color: white;
+  padding: 1px;
+}
+
+h1.font.cute,
+h2.font.cute {
+  font-family: 'Proza Libre', sans-serif;
+  font-weight: lighter;
+}
+
+h3.font.cute {
+  font-family: 'Proza Libre', sans-serif;
+  font-size: 12pt;
+}
+
+h3.header-text.font.cute,
+h3.header-text.font.cute > a {
+  color: #fff;
+}
+
+p.font.cute {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#submit-button.button.cute,
+#delete-button.button.cute,
+#new-button.button.cute,
+#no-delete.button.cute,
+#yes-delete.button.cute {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: #562b81;
+  height: 40px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input.background.cute,
+textarea.background.cute {
+  margin-bottom: 20px;
+  border: 1px solid #b6b6b6;
+  border-radius: 4px;
+}
+
+input:focus.background.cute,
+textarea:focus.background.cute {
+  outline: none;
+  border: 2px solid #562b81;
+}
+
+#delete-entry.background.cute {
+  border: 3px solid #562b81;
+  border-radius: 20px;
+}
+
+/* TECHNO THEME */
+
+/* OCEAN THEME */
+
+/* WOODS THEME */
+
+/* FANCY THEME */

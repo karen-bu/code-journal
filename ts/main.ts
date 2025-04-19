@@ -134,7 +134,7 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
 
   const $newEntryTitle = document.createElement('h2');
   $newEntryTitle.textContent = entry.entryTitle;
-  $newEntryTitle.setAttribute('class', 'column-half');
+  $newEntryTitle.setAttribute('class', 'column-half font standard');
   $newEntryTitle.setAttribute('id', 'entry-title');
   $newEntryTitle.setAttribute('data-entry-id', String(entry.entryID));
 
@@ -143,6 +143,7 @@ function renderEntry(entry: JournalEntry): HTMLLIElement {
   $editEntryImg.setAttribute('data-entry-id', String(entry.entryID));
 
   const $newEntryNotes = document.createElement('p');
+  $newEntryNotes.setAttribute('class', 'font standard');
   $newEntryNotes.setAttribute('id', 'entry-notes');
   $newEntryNotes.setAttribute('data-entry-id', String(entry.entryID));
   $newEntryNotes.textContent = entry.entryNotes;
@@ -370,3 +371,5 @@ $yesDelete.addEventListener('click', () => {
   data.editing = null;
   viewSwap('entries');
 });
+
+// CHANGING THEMES
