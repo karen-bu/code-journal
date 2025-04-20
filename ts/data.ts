@@ -10,6 +10,7 @@ interface Data {
   entries: JournalEntry[];
   editing: null | JournalEntry;
   nextEntryId: number;
+  themeName: string | null;
 }
 
 const data = readEntry();
@@ -31,6 +32,7 @@ function readEntry(): Data {
       entries: [],
       editing: null,
       nextEntryId: 1,
+      themeName: 'basic',
     };
   }
   return data;

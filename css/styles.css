@@ -39,8 +39,19 @@
   width: 25%;
 }
 
+.column-eighth {
+  width: 18%;
+  text-align: center;
+}
+
 .column-half.header-column {
   max-width: 50%;
+}
+
+.column-half.header-column.switch-theme {
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }
 
 @media screen and (width < 1024px) {
@@ -52,6 +63,12 @@
   .column-quarter.header-column.themes-anchor {
     width: 200%;
     text-align: center;
+  }
+
+  .column-half.header-column.switch-theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -119,10 +136,6 @@ p.delete-text {
   padding-bottom: 5px;
 }
 
-.entries-anchor {
-  padding-top: 8px;
-}
-
 #submit-button,
 #new-button,
 #yes-delete {
@@ -132,10 +145,6 @@ p.delete-text {
 #delete-button,
 #no-delete {
   float: left;
-}
-
-#new-button {
-  margin: 20px;
 }
 
 input {
