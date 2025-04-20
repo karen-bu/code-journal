@@ -1,0 +1,434 @@
+/* basic THEME */
+
+body.background.basic {
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+header.background.basic {
+  background-color: #562b81;
+  color: white;
+  padding: 1px;
+}
+
+h1.font.basic,
+h2.font.basic {
+  font-family: 'Proza Libre', sans-serif;
+  font-weight: lighter;
+}
+
+h3.font.basic {
+  font-family: 'Proza Libre', sans-serif;
+  font-size: 12pt;
+}
+
+p.header-text.font.basic,
+p.header-text.font.basic > a {
+  color: #fff;
+}
+
+p.font.basic {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.entries-anchor.font.basic {
+  padding-top: 8px;
+}
+
+#submit-button.button.basic,
+#delete-button.button.basic,
+#new-button.button.basic,
+#no-delete.button.basic,
+#yes-delete.button.basic {
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: #562b81;
+  height: 40px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#new-button.button.basic {
+  margin: 20px;
+}
+
+textarea.background.basic,
+input.background.basic[type='text'] {
+  font-family: 'Open Sans', sans-serif;
+}
+
+input.background.basic,
+textarea.background.basic {
+  margin-bottom: 20px;
+  border: 1px solid #b6b6b6;
+  border-radius: 4px;
+}
+
+input:focus.background.basic,
+textarea:focus.background.basic {
+  outline: none;
+  border: 2px solid #562b81;
+}
+
+#delete-entry.background.basic {
+  border: 3px solid #562b81;
+  border-radius: 20px;
+}
+
+/* TECHNO THEME */
+body.background.techno {
+  margin: 0;
+  background-color: #000;
+}
+
+header.background.techno {
+  background-color: #21c63a;
+  color: white;
+  padding: 1px;
+}
+
+h1.font.techno,
+h2.font.techno {
+  font-family: 'Press Start 2P', sans-serif;
+  font-weight: lighter;
+  color: white;
+  font-size: 20px;
+}
+
+h3.font.techno {
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 12pt;
+  color: white;
+}
+
+p.header-text.font.techno,
+p.header-text.font.techno > a {
+  color: #fff;
+}
+
+p.font.techno {
+  font-family: 'Chakra Petch', sans-serif;
+  color: white;
+}
+
+.entries-anchor.font.techno {
+  padding-top: 16px;
+}
+
+#submit-button.button.techno,
+#delete-button.button.techno,
+#new-button.button.techno,
+#no-delete.button.techno,
+#yes-delete.button.techno {
+  font-family: 'Chakra Petch', sans-serif;
+  color: white;
+  background-color: #21c63a;
+  height: 40px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#new-button.button.techno {
+  margin: 10px;
+}
+
+i.techno {
+  color: #21c63a;
+}
+
+textarea.background.techno,
+input.background.techno[type='text'] {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+input.background.techno,
+textarea.background.techno {
+  margin-bottom: 20px;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+
+input:focus.background.techno,
+textarea:focus.background.techno {
+  outline: none;
+  border: 2px solid #21c63a;
+}
+
+#delete-entry.background.techno {
+  background-color: black;
+  border: 3px solid #21c63a;
+  border-radius: 20px;
+}
+
+/* CUTE THEME */
+body.background.cute {
+  margin: 0;
+  background-color: #fae9f9;
+}
+
+header.background.cute {
+  background-color: #dd6ecb;
+  color: white;
+  padding: 1px;
+}
+
+h1.font.cute,
+h2.font.cute {
+  font-family: Pacifico, sans-serif;
+  font-weight: lighter;
+  color: #5e005c;
+}
+
+h3.font.cute {
+  font-family: Pacifico, sans-serif;
+  font-size: 12pt;
+}
+
+h2.header-text.font.cute,
+h3.header-text.font.cute {
+  color: white;
+}
+
+p.header-text.font.cute,
+p.header-text.font.cute > a {
+  color: white;
+}
+
+p.font.cute {
+  font-family: 'Balsamiq Sans', sans-serif;
+  color: #5e005c;
+}
+
+.entries-anchor.font.cute {
+  padding-top: 16px;
+}
+
+#submit-button.button.cute,
+#delete-button.button.cute,
+#new-button.button.cute,
+#no-delete.button.cute,
+#yes-delete.button.cute {
+  font-family: 'Balsamiq Sans', sans-serif;
+  color: white;
+  background-color: #d11fb3;
+  height: 40px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#new-button.button.cute {
+  margin: 20px;
+}
+
+i.cute {
+  color: #5e005c;
+}
+
+textarea.background.cute,
+input.background.cute[type='text'] {
+  font-family: 'Balsamiq Sans', sans-serif;
+}
+
+input.background.cute,
+textarea.background.cute {
+  margin-bottom: 20px;
+  border: 1px solid #d097e2;
+  border-radius: 4px;
+}
+
+input:focus.background.cute,
+textarea:focus.background.cute {
+  outline: none;
+  border: 2px solid #d11fb3;
+}
+
+#delete-entry.background.cute {
+  border: 3px solid #d11fb3;
+  border-radius: 20px;
+}
+
+/* YEEHAW THEME */
+body.background.western {
+  margin: 0;
+  background-color: #f4f0e8;
+}
+
+header.background.western {
+  background-color: #776149;
+  color: white;
+  padding: 1px;
+}
+
+h1.font.western,
+h2.font.western {
+  font-family: Sancreek, serif;
+  font-weight: lighter;
+  color: #7aa259;
+}
+
+h3.font.western {
+  font-family: Sancreek, serif;
+  font-size: 12pt;
+  color: #7aa259;
+}
+
+h2.header-text.font.western,
+h3.header-text.font.western {
+  color: white;
+}
+
+p.header-text.font.western,
+p.header-text.font.western > a {
+  color: #fff;
+}
+
+p.font.western {
+  font-family: 'Cormorant Garamond', serif;
+  color: #776149;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.entries-anchor.font.western {
+  padding-top: 5px;
+}
+
+#submit-button.button.western,
+#delete-button.button.western,
+#new-button.button.western,
+#no-delete.button.western,
+#yes-delete.button.western {
+  font-family: 'Cormorant Garamond', serif;
+  color: white;
+  background-color: #7aa259;
+  height: 40px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+#new-button.button.western {
+  margin: 20px;
+}
+
+i.western {
+  color: #7aa259;
+}
+
+textarea.background.western,
+input.background.western[type='text'] {
+  font-family: 'Cormorant Garamond', sans-serif;
+}
+
+input.background.western,
+textarea.background.western {
+  margin-bottom: 20px;
+  border: 1px solid #776149;
+  border-radius: 4px;
+}
+
+input:focus.background.western,
+textarea:focus.background.western {
+  outline: none;
+  border: 2px solid #7aa259;
+}
+
+#delete-entry.background.western {
+  border: 3px solid #776149;
+  border-radius: 20px;
+}
+
+/* SUNNY THEME */
+
+body.background.sunny {
+  margin: 0;
+  background-color: #fffbe9;
+}
+
+header.background.sunny {
+  background-image: url('../images/sunny-background.jpg');
+  background-size: cover;
+}
+
+h1.font.sunny,
+h2.font.sunny {
+  font-family: Agbalumo, serif;
+  color: #f69102;
+}
+
+h3.font.sunny {
+  font-family: Agbalumo, sans-serif;
+  font-size: 12pt;
+  color: #f69102;
+}
+
+h2.header-text.font.sunny,
+h3.header-text.font.sunny {
+  color: #ff5453;
+}
+
+p.header-text.font.sunny,
+p.header-text.font.sunny > a {
+  color: #ff5453;
+}
+
+p.font.sunny {
+  font-family: Dosis, serif;
+  color: #f69102;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
+.entries-anchor.font.sunny {
+  padding-top: 10px;
+}
+
+#submit-button.button.sunny,
+#delete-button.button.sunny,
+#new-button.button.sunny,
+#no-delete.button.sunny,
+#yes-delete.button.sunny {
+  font-family: Dosis, serif;
+  color: white;
+  background-color: #ffb293;
+  height: 40px;
+  width: 70px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+#new-button.button.sunny {
+  margin: 20px;
+}
+
+i.sunny {
+  color: #ff5453;
+}
+
+textarea.background.sunny,
+input.background.sunny[type='text'] {
+  font-family: Dosis, sans-serif;
+}
+
+input.background.sunny,
+textarea.background.sunny {
+  margin-bottom: 20px;
+  border: 1px solid #ff5453;
+  border-radius: 4px;
+}
+
+input:focus.background.sunny,
+textarea:focus.background.sunny {
+  outline: none;
+  border: 2px solid #ff5453;
+}
+
+#delete-entry.background.sunny {
+  border: 3px solid #776149;
+  border-radius: 20px;
+}

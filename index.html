@@ -4,37 +4,111 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Code Journal</title>
+
+    <!-- Images -->
     <link rel="icon" href="images/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap"
-      rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap"
-      rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sancreek&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Agbalumo&display=swap"
+      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap"
+      rel="stylesheet" />
+
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/themes.css" />
   </head>
 
-  <body>
+  <body class="background basic">
     <!-- header -->
-    <header>
+    <header class="background basic">
       <div class="container">
         <div class="row header">
-          <div class="column-quarter">
-            <h2>Code Journal</h2>
+          <div class="column-quarter header-column">
+            <h2 class="header-text font basic">Code Journal</h2>
           </div>
-          <div class="column-quarter entries-anchor">
+          <div class="column-quarter header-column entries-anchor font basic">
             <div>
-              <a href="#" class="entries-anchor text"><h3>Entries</h3></a>
+              <p class="header-text font basic"><a href="#"></a>Entries</p>
+            </div>
+          </div>
+        </div>
+        <div class="row header">
+          <div class="column-quarter header-column themes-anchor">
+            <h3 class="header-text font basic">Themes:</h3>
+          </div>
+          <div class="column-half header-column switch-theme">
+            <div class="column-eighth header-column">
+              <p class="header-text font basic">
+                <a href="#" class="header-text font basic" id="theme-basic"
+                  >basic</a
+                >
+              </p>
+            </div>
+
+            <div class="column-eighth header-column">
+              <p class="header-text font basic">
+                <a href="#" class="header-text font basic" id="theme-techno"
+                  >techno</a
+                >
+              </p>
+            </div>
+
+            <div class="column-eighth header-column">
+              <p class="header-text font basic">
+                <a href="#" class="header-text font basic" id="theme-cute"
+                  >cute</a
+                >
+              </p>
+            </div>
+
+            <div class="column-eighth header-column">
+              <p class="header-text font basic">
+                <a href="#" class="header-text font basic" id="theme-yeehaw"
+                  >western</a
+                >
+              </p>
+            </div>
+
+            <div class="column-eighth header-column">
+              <p class="header-text font basic">
+                <a href="#" class="header-text font basic" id="theme-sunny"
+                  >sunny</a
+                >
+              </p>
             </div>
           </div>
         </div>
@@ -46,7 +120,7 @@
       <div class="view entryform hidden" data-view="entry-form">
         <div class="row">
           <div class="column-full">
-            <h1 class="entry-form-title">New Entry</h1>
+            <h1 class="entry-form-title font basic">New Entry</h1>
           </div>
         </div>
 
@@ -61,32 +135,48 @@
             </div>
 
             <div class="column-half entry">
-              <h3>Title</h3>
+              <h3 class="font basic">Title</h3>
               <div class="textbox">
-                <input type="text" id="title" name="title" required />
+                <input
+                  class="background basic"
+                  type="text"
+                  id="title"
+                  name="title"
+                  required />
               </div>
-              <h3>Photo URL</h3>
+              <h3 class="font basic">Photo URL</h3>
               <div class="textbox">
-                <input type="text" id="photo-url" name="photoURL" required />
+                <input
+                  class="background basic"
+                  type="text"
+                  id="photo-url"
+                  name="photoURL"
+                  required />
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="column-full">
-              <h3>Notes</h3>
+              <h3 class="font basic">Notes</h3>
               <div class="textbox">
-                <textarea id="notes" name="notes" required></textarea>
+                <textarea
+                  class="background basic"
+                  id="notes"
+                  name="notes"
+                  required></textarea>
               </div>
             </div>
           </div>
 
           <div class="row">
             <div class="column-half">
-              <button id="submit-button">SAVE</button>
+              <button id="submit-button" class="button basic">SAVE</button>
             </div>
             <div class="column-half">
-              <button id="delete-button" class="hidden">DELETE</button>
+              <button id="delete-button" class="hidden button basic">
+                DELETE
+              </button>
             </div>
           </div>
         </form>
@@ -96,9 +186,11 @@
       <div class="view entrylist" data-view="entries">
         <!-- subheader + button -->
         <div class="row subheader">
-          <div class="column-half subheader"><h1>Entries</h1></div>
           <div class="column-half subheader">
-            <button id="new-button">NEW</button>
+            <h1 class="font basic">Entries</h1>
+          </div>
+          <div class="column-half subheader">
+            <button id="new-button" class="button basic">NEW</button>
           </div>
         </div>
 
@@ -111,18 +203,22 @@
       <!-- no entries -->
       <div class="row no-entries">
         <div class="column-full">
-          <p>No entries have been recorded.</p>
+          <p class="font basic">No entries have been recorded.</p>
         </div>
       </div>
       <!-- end data-view="entries"-->
-      <dialog id="delete-entry">
-        <div class="row"><h2 class="delete-heading">Warning!</h2></div>
+      <dialog id="delete-entry" class="background basic">
         <div class="row">
-          <p class="delete-text">Are you sure you want to delete this entry?</p>
-          <p class="delete-text">This action cannot be undone.</p>
+          <h2 class="delete-heading font basic">Warning!</h2>
         </div>
-        <button id="no-delete">NO</button>
-        <button id="yes-delete">YES</button>
+        <div class="row">
+          <p class="delete-text font basic">
+            Are you sure you want to delete this entry?
+          </p>
+          <p class="delete-text font basic">This action cannot be undone.</p>
+        </div>
+        <button id="no-delete" class="button basic">NO</button>
+        <button id="yes-delete" class="button basic">YES</button>
       </dialog>
     </main>
 

@@ -100,13 +100,17 @@ function renderEntry(entry) {
   $newEntryColumnIcon.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryTitle = document.createElement('h2');
   $newEntryTitle.textContent = entry.entryTitle;
-  $newEntryTitle.setAttribute('class', 'column-half');
+  $newEntryTitle.setAttribute('class', 'column-half font basic');
   $newEntryTitle.setAttribute('id', 'entry-title');
   $newEntryTitle.setAttribute('data-entry-id', String(entry.entryID));
   const $editEntryImg = document.createElement('i');
-  $editEntryImg.setAttribute('class', 'fa-solid fa-pen-to-square edit-img');
+  $editEntryImg.setAttribute(
+    'class',
+    'fa-solid fa-pen-to-square edit-img background basic',
+  );
   $editEntryImg.setAttribute('data-entry-id', String(entry.entryID));
   const $newEntryNotes = document.createElement('p');
+  $newEntryNotes.setAttribute('class', 'font basic');
   $newEntryNotes.setAttribute('id', 'entry-notes');
   $newEntryNotes.setAttribute('data-entry-id', String(entry.entryID));
   $newEntryNotes.textContent = entry.entryNotes;
@@ -235,7 +239,8 @@ $ul?.addEventListener('click', (event) => {
   // delete button shows up
   const $deleteButton = document.querySelector('#delete-button');
   if (!$deleteButton) throw new Error('$deleteButon does not exist!');
-  $deleteButton.className = '';
+  $deleteButton.className = 'button basic';
+  themeSwap(data.themeName);
 });
 // DELETING ENTRIES FROM THE FORM
 const $deleteButton = document.querySelector('#delete-button');
@@ -283,3 +288,43 @@ $yesDelete.addEventListener('click', () => {
   data.editing = null;
   viewSwap('entries');
 });
+// CHANGING THEMES
+const $themeSelect = document.querySelector('.switch-theme');
+$themeSelect?.addEventListener('click', (event) => {
+  const theme = event.target;
+  if (event.target === null) {
+    return '';
+  } else data.themeName = theme.textContent;
+  const themeName = data.themeName;
+  themeSwap(themeName?.trim());
+});
+function themeSwap(themeName) {
+  // query for all changeable elements (background and font tags)
+  const $themedBackgrounds = document.querySelectorAll('.background');
+  const $themedFonts = document.querySelectorAll('.font');
+  const $themedButtons = document.querySelectorAll('.button');
+  for (let i = 0; i < $themedBackgrounds.length; i++) {
+    $themedBackgrounds[i].classList.remove('basic');
+    $themedBackgrounds[i].classList.remove('techno');
+    $themedBackgrounds[i].classList.remove('cute');
+    $themedBackgrounds[i].classList.remove('western');
+    $themedBackgrounds[i].classList.remove('sunny');
+    $themedBackgrounds[i].classList.add(themeName);
+  }
+  for (let i = 0; i < $themedFonts.length; i++) {
+    $themedFonts[i].classList.remove('basic');
+    $themedFonts[i].classList.remove('techno');
+    $themedFonts[i].classList.remove('cute');
+    $themedFonts[i].classList.remove('western');
+    $themedFonts[i].classList.remove('sunny');
+    $themedFonts[i].classList.add(themeName);
+  }
+  for (let i = 0; i < $themedButtons.length; i++) {
+    $themedButtons[i].classList.remove('basic');
+    $themedButtons[i].classList.remove('techno');
+    $themedButtons[i].classList.remove('cute');
+    $themedButtons[i].classList.remove('western');
+    $themedButtons[i].classList.remove('sunny');
+    $themedButtons[i].classList.add(themeName);
+  }
+}
