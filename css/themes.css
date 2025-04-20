@@ -53,6 +53,7 @@ p.font.basic {
   margin: 20px;
 }
 
+textarea.background.basic,
 input.background.basic[type='text'] {
   font-family: 'Open Sans', sans-serif;
 }
@@ -137,6 +138,7 @@ i.techno {
   color: #21c63a;
 }
 
+textarea.background.techno,
 input.background.techno[type='text'] {
   font-family: 'Chakra Petch', sans-serif;
 }
@@ -225,6 +227,7 @@ i.cute {
   color: #5e005c;
 }
 
+textarea.background.cute,
 input.background.cute[type='text'] {
   font-family: 'Balsamiq Sans', sans-serif;
 }
@@ -316,6 +319,7 @@ i.western {
   color: #7aa259;
 }
 
+textarea.background.western,
 input.background.western[type='text'] {
   font-family: 'Cormorant Garamond', sans-serif;
 }
@@ -406,6 +410,7 @@ i.sunny {
   color: #ff5453;
 }
 
+textarea.background.sunny,
 input.background.sunny[type='text'] {
   font-family: Dosis, sans-serif;
 }
@@ -413,14 +418,14 @@ input.background.sunny[type='text'] {
 input.background.sunny,
 textarea.background.sunny {
   margin-bottom: 20px;
-  border: 1px solid #776149;
+  border: 1px solid #ff5453;
   border-radius: 4px;
 }
 
 input:focus.background.sunny,
 textarea:focus.background.sunny {
   outline: none;
-  border: 2px solid #92bd6f;
+  border: 2px solid #ff5453;
 }
 
 #delete-entry.background.sunny {
