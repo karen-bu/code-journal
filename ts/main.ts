@@ -6,6 +6,8 @@
 // fanart of the anime character kyotaro sugishita, from the manga/anime 'wind breaker.' the manga was first released in 2021, and the first season of the anime released in 2024. wind breaker is considered a shonen fight anime.
 // test url 4: https://64.media.tumblr.com/704b217831d890fee3e84c5f28646889/dfeae80de15b3de7-08/s1280x1920/78f8d964fcff80916d40ea5e6121afbc5562f283.jpg
 // concept art of two original characters from a comic idea in development. the character on the left is 'godchild', a rapper who is a vampire. the character on the right is 'dogboy', a rapper who is a werewolf. the premise of the comic revolves around the two of them navigating the music industry .
+// test url 5: https://64.media.tumblr.com/2ca270ddd113f380d3e49870ed47f790/e7ae9b0eb41762fb-4b/s1280x1920/719108cc4078fcbea6abd0ca350ffa4aba3b7c1b.jpg
+// a drawing based on the passengers of a truck i pulled up to at a stoplight while driving down pacific avenue in my neighborhood of long beach, coming home from the rink. it was a delightful encounter :) when the light turned green, they drove away happily. i only wish i could have found out what their names were ...
 
 // PHOTO PREVIEW FROM PASTING URL //
 
