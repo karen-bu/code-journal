@@ -336,7 +336,6 @@ document.addEventListener('input', (event) => {
   const searchTerm = searchTarget.value.toLowerCase();
   const $entryList = document.querySelectorAll('li');
   const $noMatch = document.querySelector('.no-search');
-  console.log($entryList);
   // loop through entries array
   for (let i = 0; i < data.entries.length; i++) {
     // show entries where title or notes includes the search term
@@ -354,7 +353,6 @@ document.addEventListener('input', (event) => {
       !data.entries[i].entryNotes.includes(searchTerm)
     ) {
       $entryList[i].classList.add('hidden');
-      $noMatch?.classList.remove('hidden');
     }
     // if search is cleared, restore all to normal
     else if (!searchTarget) {
