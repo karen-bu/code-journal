@@ -218,6 +218,7 @@ function viewSwap(viewName: any): void {
     $entryList.className = 'view entrylist hidden';
     data.view = 'entry-form';
   }
+  resetSearch();
   writeEntry();
   toggleNoEntries();
 }
@@ -457,8 +458,14 @@ document.addEventListener('input', (event: Event) => {
 
     // if search is cleared, restore all to normal
     else if (!searchTarget) {
-      $entryList[i].classList.remove('hidden');
-      $noMatch?.classList.add('hidden');
+      resetSearch();
     }
   }
 });
+
+function resetSearch(): void {
+  const $entryList = document.querySelectorAll('li');
+  for (let i = 0; i < $entryList.length; i++) {
+    $entryList[i].classList.remove('hidden');
+  }
+}
