@@ -1,5 +1,5 @@
 // test url 1: https://64.media.tumblr.com/1b54e834bda85fc26bc6a018e5f9b444/a3ba198d6b60f48d-cd/s1280x1920/4b031174a9cb50953918afe5ca37e1143ff5ee80.jpg
-// a drawing based on lyrics from the glass animals song, 'pools' from their 2014 album zaba. zaba was the band's debut album and established their signature style of offbeat percussion and psychedelic sounds incorporated into pop music.
+// a drawing based on lyrics from the glass animals song, 'pools' from their 2014 album zaba. zaba was the band's debut album and established their signature style of eclectic percussion and psychedelic sounds incorporated into pop music.
 // test url 2: https://64.media.tumblr.com/a676bf6547d045021cd4f0d59a5a6bcf/69b2f4deb5e1518b-c5/s1280x1920/2ed51076367f818726f73ff58c62fe5943a89aaf.jpg
 // a drawing based on lyrics from the song 'i just want to sell out my funeral' by the wonder years from their 2013 album, 'the greatest generation.' the album received critical acclaim when released and was widely regarded to have pushed the boundaries of the pop-punk genre.
 // test url 3: https://64.media.tumblr.com/81d06a9d4b7488ba4680367802e24e4d/dd16d4a1f06633be-10/s1280x1920/cda28cd49a068f497661b96065a359d48e93d308.jpg
@@ -422,3 +422,42 @@ function themeSwap(themeName: any): void {
     $themedButtons[i].classList.add(themeName);
   }
 }
+
+// SEARCH FUNCTION
+
+const $searchBar = document.querySelector('#search-bar');
+if (!$searchBar) throw new Error('$searchBar does not exist!');
+
+document.addEventListener('input', (event: Event) => {
+  const searchTarget = event.target as HTMLInputElement;
+  const searchTerm = searchTarget.value.toLowerCase();
+  const $entryList = document.querySelectorAll('li');
+  const $noMatch = document.querySelector('.no-search');
+
+  console.log($entryList);
+  // loop through entries array
+  for (let i = 0; i < data.entries.length; i++) {
+    // show entries where title or notes includes the search term
+    if (
+      data.entries[i].entryTitle.includes(searchTerm) ||
+      data.entries[i].entryNotes.includes(searchTerm)
+    ) {
+      $entryList[i].classList.remove('hidden');
+      $noMatch?.classList.add('hidden');
+    }
+    // do not show entries where title or notes do not include the search term
+    // show a message if no entries match
+    else if (
+      !data.entries[i].entryTitle.includes(searchTerm) ||
+      !data.entries[i].entryNotes.includes(searchTerm)
+    ) {
+      $entryList[i].classList.add('hidden');
+      $noMatch?.classList.remove('hidden');
+    }
+    // if search is cleared, restore all to normal
+    else if (!searchTarget) {
+      $entryList[i].classList.remove('hidden');
+      $noMatch?.classList.add('hidden');
+    }
+  }
+});

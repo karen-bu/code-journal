@@ -62,7 +62,7 @@
           </div>
           <div class="column-quarter header-column entries-anchor font basic">
             <div>
-              <p class="header-text font basic"><a href="#"></a>Entries</p>
+              <p class="header-text font basic"><a href="#">Entries</a></p>
             </div>
           </div>
         </div>
@@ -198,9 +198,15 @@
         <div class="row">
           <div class="column-full">
             <input
-              class="background font basic"
               type="search"
-              placeholder="search entries by title" />
+              class="background font basic"
+              id="search-bar"
+              placeholder="search entries" />
+          </div>
+        </div>
+        <div class="row no-search hidden">
+          <div class="column-full">
+            <p class="font basic">No entries match the search term.</p>
           </div>
         </div>
 
