@@ -111,7 +111,8 @@
   }
 }
 
-.no-entries {
+.no-entries,
+.no-search {
   text-align: center;
 }
 
@@ -206,4 +207,9 @@ i {
   #edit-icon-div {
     width: 20%;
   }
+}
+
+i:hover,
+button:hover {
+  cursor: pointer;
 }
